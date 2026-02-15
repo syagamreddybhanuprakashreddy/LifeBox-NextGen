@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base: Clean, Enterprise White */
+    --background: 0 0% 100%;
+    /* #FFFFFF */
+    --foreground: 220 13% 18%;
+    /* #272A35 - Deep Charcoal */
+
+    /* Card: Subtle differentiation */
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 18%;
+
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 18%;
+
+    /* Primary: Strong, Trustworthy Blue (Stripe-like) */
+    --primary: 221 83% 53%;
+    /* #2563EB - Royal Blue */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: Technical Grey */
+    --secondary: 210 40% 96.1%;
+    /* #F3F4F6 */
+    --secondary-foreground: 222 47% 11%;
+
+    /* Muted: Subdued text */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Accent: Controlled Highlight */
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222 47% 11%;
+
+    /* Destructive */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Border: Subtle and Technical */
+    --border: 214 32% 91%;
+    /* #E5E7EB */
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+
+    --radius: 0.375rem;
+    /* 6px - Professional, slightly rounded */
+  }
+
+  .dark {
+    /* Enterprise Dark Mode (Linear/Github Dark) */
+    --background: 222 47% 11%;
+    /* #0F172A */
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47.4% 11.2%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217 33% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 224 76% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* Optimize font rendering */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans tracking-tight;
+    font-weight: 600;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Technical Grid Background */
+  .bg-grid-slate-100 {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(241 245 249)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+  }
+
+  /* Enterprise Card Hover */
+  .hover-card-tech {
+    @apply transition-all duration-300 hover:shadow-lg hover:border-gray-300 hover:-translate-y-1;
+  }
+
+  /* Subtle Section Border */
+  .section-divide {
+    @apply border-b border-gray-100;
+  }
+}
