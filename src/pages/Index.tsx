@@ -1,123 +1,151 @@
+import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import {
-  ArrowRight, Shield, Globe, Cpu, Layers, Zap, BarChart3, Lock
+  ArrowRight, Cpu, Layers, Zap, Globe, Database,
+  Terminal, BarChart, Smartphone, PenTool, Layout, Box, ShieldCheck, Mail, Code
 } from "lucide-react";
 import Seo from "@/components/Seo";
 
 const Index = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const extendedServices = [
+    { icon: Smartphone, title: "Application Development", desc: "Native & cross-platform mobile solutions.", color: "text-blue-400", border: "border-blue-500/30", bg: "bg-blue-500/10" },
+    { icon: BarChart, title: "Business Analytics", desc: "Data-driven insights for strategic growth.", color: "text-green-400", border: "border-green-500/30", bg: "bg-green-500/10" },
+    { icon: Smartphone, title: "Android Development", desc: "Optimized performance for the Android ecosystem.", color: "text-emerald-400", border: "border-emerald-500/30", bg: "bg-emerald-500/10" },
+    { icon: Code, title: "Custom Software", desc: "Tailored solutions for unique enterprise needs.", color: "text-purple-400", border: "border-purple-500/30", bg: "bg-purple-500/10" },
+    { icon: Terminal, title: "SaaS Development", desc: "Scalable cloud-native software products.", color: "text-cyan-400", border: "border-cyan-500/30", bg: "bg-cyan-500/10" },
+    { icon: ShieldCheck, title: "Software Testing", desc: "Rigorous QA and automated testing pipelines.", color: "text-red-400", border: "border-red-500/30", bg: "bg-red-500/10" },
+    { icon: PenTool, title: "UX Design", desc: "Research-backed user interface design.", color: "text-pink-400", border: "border-pink-500/30", bg: "bg-pink-500/10" },
+    { icon: Layout, title: "Web Design", desc: "Modern, responsive, and aesthetic web interfaces.", color: "text-indigo-400", border: "border-indigo-500/30", bg: "bg-indigo-500/10" },
+    { icon: Globe, title: "Web Development", desc: "Full-stack web applications and portals.", color: "text-orange-400", border: "border-orange-500/30", bg: "bg-orange-500/10" },
+    { icon: Database, title: "Custom Solutions", desc: "End-to-end digital transformation services.", color: "text-teal-400", border: "border-teal-500/30", bg: "bg-teal-500/10" },
+  ];
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-white text-gray-900 selection:bg-blue-100 selection:text-blue-900 font-sans">
+    // Explicitly set bg-black and text-white here to override any conflicting styles
+    <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden selection:bg-blue-500/30">
       <Seo
-        title="Enterprise Digital Infrastructure"
-        description="LifeBox NextGen builds scalable digital platforms, enterprise ERP systems, and AI-driven career intelligence solutions."
+        title="NextGen Enterprise Infrastructure"
+        description="LifeBox NextGen - The intelligent digital backbone for modern institutions."
       />
 
-      {/* Hero Section - Minimal & Strong */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden border-b border-gray-100 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-50 via-white to-white">
-        <div className="container mx-auto px-6 lg:px-8 text-center max-w-5xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 rounded-full border border-gray-200 bg-white shadow-sm transition-all hover:bg-gray-50">
-            <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
-            <span className="text-xs font-medium text-gray-600 tracking-wide uppercase">New: Gnan AI 2.0 Released</span>
-          </div>
+      {/* --- HERO SECTION --- */}
+      <section className="relative pt-32 pb-32 lg:pt-48 lg:pb-40 overflow-hidden bg-black">
+        {/* Force Dark Background Layer */}
+        <div className="absolute inset-0 bg-black z-0 pointer-events-none" />
 
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-8 leading-[1.1]">
-            Intelligent infrastructure <br className="hidden md:block" />
-            for <span className="text-gray-500">modern enterprises.</span>
+        {/* Glow Effects */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-[-20%] left-[20%] w-[500px] h-[500px] bg-blue-600/20 blur-[150px] rounded-full mix-blend-screen opacity-60 animate-pulse-glow" />
+          <div className="absolute bottom-[-10%] right-[10%] w-[400px] h-[400px] bg-purple-500/10 blur-[120px] rounded-full mix-blend-screen opacity-40 animate-float" />
+        </div>
+
+        <div className="container mx-auto px-6 lg:px-8 relative z-10 flex flex-col items-center justify-center text-center">
+
+
+
+          {/* Headline - Using explicitly white text */}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+            <span className="block">Intelligent</span>
+            <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent pb-2">Infrastructure.</span>
           </h1>
 
-          <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-10 font-[450]">
-            We build the backbone of your digital transformation. From AI-driven assessment engines to scalable ERP systems.
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed mb-12 font-light tracking-wide">
+            Architect the future of your organization with a unified digital ecosystem.
+            Seamlessly integrated AI, ERP, and Identity Management.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Button size="lg" className="h-12 px-8 text-[15px] bg-gray-900 text-white hover:bg-gray-800 transition-all shadow-md rounded-md font-medium" asChild>
-              <Link to="/products">Start Building</Link>
+          {/* Core Graphic */}
+          <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto mb-16 perspective-1000">
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-500/60 to-purple-600/60 rounded-full blur-3xl opacity-50 animate-pulse-glow" />
+            <div className="absolute inset-0 border border-white/20 rounded-full animate-[spin_10s_linear_infinite]" />
+            <div className="absolute inset-4 border border-blue-400/30 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+            <div className="absolute inset-12 border border-purple-400/30 rounded-full animate-[spin_20s_linear_infinite]" />
+
+            {/* Center Icon */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/90">
+              <Globe className="h-16 w-16 opacity-80 animate-float" />
+            </div>
+          </div>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
+            <Button size="lg" className="h-14 px-10 text-base bg-blue-600 hover:bg-blue-700 text-white shadow-[0_0_25px_rgba(37,99,235,0.4)] rounded-full font-bold border border-blue-400/50 transition-all hover:scale-105" asChild>
+              <Link to="/contact">
+                Start Transformation <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
             </Button>
-            <Button size="lg" variant="outline" className="h-12 px-8 text-[15px] border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-gray-900 rounded-md font-medium bg-white shadow-sm" asChild>
-              <Link to="/contact">Contact Sales</Link>
+            <Button size="lg" variant="outline" className="h-14 px-10 text-base bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white rounded-full font-bold backdrop-blur-sm transition-all" asChild>
+              <Link to="/products">Explore Ecosystem</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Social Proof - Monochrome Strict */}
-      <section className="py-12 border-b border-gray-100">
+      {/* --- PRODUCTS SECTION --- */}
+      <section className="py-24 relative z-10 bg-[#050505]">
         <div className="container mx-auto px-6 lg:px-8">
-          <p className="text-center text-xs font-semibold text-gray-400 uppercase tracking-widest mb-8">Trusted by forward-thinking teams</p>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-40 grayscale mix-blend-multiply">
-            {/* Using text placeholders for logos to ensure "Enterprise" feel vs random icons */}
-            <span className="text-xl font-bold font-mono text-gray-800">ACME Corp</span>
-            <span className="text-xl font-bold font-mono text-gray-800">GlobalTech</span>
-            <span className="text-xl font-bold font-mono text-gray-800">University.edu</span>
-            <span className="text-xl font-bold font-mono text-gray-800">HealthPlus</span>
-            <span className="text-xl font-bold font-mono text-gray-800">FinServe</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Bento Grid layout for Products */}
-      <section className="py-24 bg-gray-50">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="max-w-3xl mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">Unified Platform</h2>
-            <p className="text-lg text-gray-500 leading-relaxed">
-              Our suite of integrated tools creates a seamless ecosystem for education, management, and growth.
-            </p>
+          <div className="mb-16 max-w-2xl">
+            <h2 className="text-3xl font-bold text-white mb-4">Unified Ecosystem</h2>
+            <p className="text-gray-400 text-lg">Powerful individually. Unstoppable together.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[400px]">
-            {/* Card 1: Gnan AI (Large) */}
-            <div className="md:col-span-2 row-span-1 rounded-xl bg-white border border-gray-200 p-8 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-              <div className="relative z-10 max-w-md">
-                <div className="h-10 w-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 mb-6">
-                  <Cpu className="h-5 w-5" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Product 1 */}
+            <div className="bg-[#0f0f11] border border-white/10 rounded-3xl p-8 hover:border-blue-500/50 transition-colors group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-blue-500/20 transition-colors" />
+              <div className="relative z-10">
+                <div className="h-12 w-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-blue-400 mb-6 border border-blue-500/30">
+                  <Cpu className="h-6 w-6" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Gnan AI</h3>
-                <p className="text-gray-500 mb-6">Advanced interview intelligence. Automate technical rounds with AI-driven coding assessments and behavioral analysis.</p>
-                <a href="https://gnan-ai.in" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-900 flex items-center gap-1 group-hover:text-blue-600 transition-colors">
-                  Explore Gnan AI <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-              {/* Abstract UI representation */}
-              <div className="absolute right-[-40px] bottom-[-40px] w-96 h-64 bg-gray-100 rounded-xl border border-gray-200 transform -rotate-6 shadow-sm group-hover:-translate-y-2 transition-transform duration-500" />
-            </div>
-
-            {/* Card 2: ERP */}
-            <div className="md:col-span-1 border border-gray-200 bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-              <div className="h-10 w-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mb-6">
-                <Layers className="h-5 w-5" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Enterprise ERP</h3>
-              <p className="text-sm text-gray-500 mb-6">Complete institutional management system. From admissions to alumni.</p>
-              <div className="absolute bottom-6 right-6">
-                <BarChart3 className="h-24 w-24 text-gray-50 opacity-50" />
+                <h3 className="text-2xl font-bold text-white mb-3">Gnan AI</h3>
+                <p className="text-gray-400 mb-6 leading-relaxed text-sm">Automated career intelligence using advanced NLP algorithms.</p>
+                <Link to="/products#gnan-ai" className="text-blue-400 font-bold text-sm hover:text-white transition-colors flex items-center gap-2">
+                  View Specs <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             </div>
 
-            {/* Card 3: LifeOS */}
-            <div className="md:col-span-1 border border-gray-200 bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
-              <div className="h-10 w-10 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600 mb-6">
-                <Globe className="h-5 w-5" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">LifeOS Ecosystem</h3>
-              <p className="text-sm text-gray-500 mb-4">Unified identity. One login for all your campus and enterprise services.</p>
-              <a href="https://lifebox-community.web.app/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-900 flex items-center gap-1 hover:text-emerald-600 transition-colors">
-                Visit LifeOS <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-
-            {/* Card 4: Services */}
-            <div className="md:col-span-2 border border-blue-600 bg-blue-600 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-              <div className="relative z-10 text-white">
-                <div className="h-10 w-10 bg-white/10 rounded-lg flex items-center justify-center text-white mb-6">
-                  <Zap className="h-5 w-5" />
+            {/* Product 2 */}
+            <div className="bg-[#0f0f11] border border-white/10 rounded-3xl p-8 hover:border-purple-500/50 transition-colors group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-purple-500/20 transition-colors" />
+              <div className="relative z-10">
+                <div className="h-12 w-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 mb-6 border border-purple-500/30">
+                  <Layers className="h-6 w-6" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Engineering Services</h3>
-                <p className="text-blue-100 mb-6 max-w-lg">Need custom infrastructure? Our engineering team builds bespoke solutions for high-scale problems.</p>
-                <Link to="/services" className="inline-flex items-center justify-center h-10 px-6 rounded bg-white text-blue-600 font-medium text-sm transition-colors hover:bg-blue-50">
-                  View Services
+                <h3 className="text-2xl font-bold text-white mb-3">Enterprise ERP</h3>
+                <p className="text-gray-400 mb-6 leading-relaxed text-sm">Modular resource planning for complex multi-campus institutions.</p>
+                <Link to="/products" className="text-purple-400 font-bold text-sm hover:text-white transition-colors flex items-center gap-2">
+                  Learn More <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Product 3 */}
+            <div className="bg-[#0f0f11] border border-white/10 rounded-3xl p-8 hover:border-yellow-500/50 transition-colors group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-yellow-500/20 transition-colors" />
+              <div className="relative z-10">
+                <div className="h-12 w-12 bg-yellow-500/20 rounded-xl flex items-center justify-center text-yellow-400 mb-6 border border-yellow-500/30">
+                  <Zap className="h-6 w-6" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-3">Custom Engineering</h3>
+                <p className="text-gray-400 mb-6 leading-relaxed text-sm">Bespoke high-scale infrastructure development services.</p>
+                <Link to="/services" className="text-yellow-400 font-bold text-sm hover:text-white transition-colors flex items-center gap-2">
+                  Start Project <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
@@ -125,47 +153,89 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features Grid - Minimal */}
-      <section className="py-24 border-t border-gray-200">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-12">
-            <div>
-              <div className="h-12 w-12 rounded-lg bg-gray-100 flex items-center justify-center mb-6">
-                <Shield className="h-6 w-6 text-gray-700" />
+      {/* --- EXTENDED ENGINEERING CAPABILITIES --- */}
+      <section className="py-24 relative z-10 bg-gradient-to-b from-[#050505] to-[#0A0A0A] border-t border-white/5 overflow-hidden">
+        {/* Subtle Background Glow */}
+        <div className="absolute top-0 right-1/4 w-[600px] h-[400px] bg-blue-900/5 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="container mx-auto px-6 lg:px-8 mb-12 flex flex-col md:flex-row justify-between items-end gap-6">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl font-bold text-white mb-2">Extended Capabilities</h2>
+            <p className="text-gray-500 text-sm">Supporting services that enhance, scale, and optimize your digital products.</p>
+          </div>
+
+          {/* Scroll Controls (Desktop) */}
+          <div className="hidden md:flex gap-2">
+            <button onClick={scrollLeft} className="h-10 w-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+              <ArrowRight className="h-5 w-5 rotate-180" />
+            </button>
+            <button onClick={scrollRight} className="h-10 w-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 transition-colors">
+              <ArrowRight className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Floating Cards Container */}
+        <div className="relative w-full">
+          <div
+            ref={scrollContainerRef}
+            className="flex md:overflow-x-auto overflow-y-hidden pb-12 px-6 lg:px-8 gap-6 scrollbar-hide snap-x"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {extendedServices.map((service, idx) => (
+              <div
+                key={idx}
+                className="group min-w-[280px] md:min-w-[320px] bg-white/[0.02] backdrop-blur-xl border border-white/5 p-6 rounded-2xl hover:border-white/10 hover:bg-white/[0.04] transition-all duration-500 hover:-translate-y-2 snap-center relative overflow-hidden"
+              >
+                {/* Idle Float Animation for Icon */}
+                <div className={`h-12 w-12 rounded-xl ${service.bg} flex items-center justify-center ${service.color} mb-6 border ${service.border} animate-float`} style={{ animationDelay: `${idx * 0.5}s` }}>
+                  <service.icon className="h-6 w-6" />
+                </div>
+
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-200 transition-colors">{service.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{service.desc}</p>
+
+                {/* Hover Glow */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Enterprise Grade Security</h3>
-              <p className="text-gray-500 leading-relaxed text-sm">SOC-2 compliant architecture with end-to-end encryption for all sensitive institutional data.</p>
-            </div>
-            <div>
-              <div className="h-12 w-12 rounded-lg bg-gray-100 flex items-center justify-center mb-6">
-                <Zap className="h-6 w-6 text-gray-700" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">High Performance</h3>
-              <p className="text-gray-500 leading-relaxed text-sm">Built on edge-computing principles ensuring low latency access from anywhere in the world.</p>
-            </div>
-            <div>
-              <div className="h-12 w-12 rounded-lg bg-gray-100 flex items-center justify-center mb-6">
-                <Lock className="h-6 w-6 text-gray-700" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-3">Role-Based Access</h3>
-              <p className="text-gray-500 leading-relaxed text-sm">Granular permission controls designed for complex organizational hierarchies.</p>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="container mx-auto px-6 lg:px-8 mt-4 text-center">
+          <div className="inline-block p-[1px] rounded-full bg-gradient-to-r from-transparent via-blue-500/50 to-transparent">
+            <div className="bg-[#0A0A0A] rounded-full px-8 py-4 flex flex-col md:flex-row items-center gap-6">
+              <span className="text-gray-300 font-medium text-sm">Need a specialized custom software solution?</span>
+              <Button size="sm" className="h-10 px-6 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold shadow-[0_0_15px_rgba(37,99,235,0.5)] animate-pulse-glow" asChild>
+                <Link to="/contact">Contact Engineers</Link>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section - Simple & Direct */}
-      <section className="py-32 bg-gray-900 text-white text-center">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">Ready to scale your infrastructure?</h2>
-          <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-            Join 50+ institutions using LifeBox NextGen to power their operations.
-          </p>
-          <div className="flex justify-center gap-4">
-            <Button size="lg" className="h-14 px-8 text-base bg-white text-gray-900 hover:bg-gray-100 font-semibold" asChild>
-              <Link to="/contact">Get accurate pricing</Link>
-            </Button>
+      {/* --- TRUST TICKER --- */}
+      <section className="py-16 border-y border-white/10 bg-black">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-xs font-bold text-gray-600 uppercase tracking-[0.3em] mb-10">Trusted By Industry Leaders</p>
+          <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-30">
+            <span className="text-2xl font-mono font-bold text-white">ACME<span className="text-gray-600">CORP</span></span>
+            <span className="text-2xl font-mono font-bold text-white">GLOBAL<span className="text-gray-600">SYS</span></span>
+            <span className="text-2xl font-mono font-bold text-white">VERTEX<span className="text-gray-600">EDU</span></span>
+            <span className="text-2xl font-mono font-bold text-white">ALPHA<span className="text-gray-600">NET</span></span>
           </div>
+        </div>
+      </section>
+
+      {/* --- FINAL CTA --- */}
+      <section className="py-32 bg-black relative overflow-hidden">
+        <div className="absolute inset-0 bg-blue-900/10 blur-[100px] pointer-events-none" />
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <h2 className="text-4xl font-bold text-white mb-8">Ready to scale?</h2>
+          <Button size="lg" className="h-16 px-12 bg-white text-black hover:bg-gray-200 font-bold rounded-full text-lg shadow-xl" asChild>
+            <Link to="/contact">Get in Touch</Link>
+          </Button>
         </div>
       </section>
     </div>

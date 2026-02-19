@@ -23,14 +23,14 @@ const products = [
     architecture: "React • Node.js • PostgreSQL",
     users: "Universities, Training Institutes, Students",
     benefits: ["Standardized assessment", "Fraud-proof certification", "Data-driven student insights"],
-    featured: true
+    featured: true,
+    color: "blue"
   },
   {
     icon: Brain,
     title: "Gnan AI",
-    link: "https://gnan-ai.in",
     tagline: "AI-driven interview intelligence.",
-    overview: "Automate technical screening and behavioral analysis with our advanced AI engine. Reduce hiring time by 70% while improving candidate quality through objective, data-backed assessments.",
+    overview: "Gnan AI is an advanced career intelligence ecosystem designed to automate technical screening and behavioral analysis. By leveraging state-of-the-art NLP and behavioral modeling, it reduces hiring time by 70% while ensuring objective, data-backed candidate matching for modern enterprises.",
     features: [
       "Natural Language Processing (NLP)",
       "Code Execution Sandbox",
@@ -40,7 +40,8 @@ const products = [
     architecture: "Python (FastAPI) • TensorFlow • Redis",
     users: "HR Teams, Tech Recruiters, Enterprises",
     benefits: ["Eliminate bias", "Scale hiring instantly", "Deep technical evaluation"],
-    featured: true
+    featured: true,
+    color: "cyan"
   },
   {
     icon: Globe,
@@ -57,7 +58,8 @@ const products = [
     architecture: "Go • gRPC • Kubernetes",
     users: "Large Enterprises, Campus Networks",
     benefits: ["Seamless user experience", "Simplified IT management", "Enhanced security"],
-    featured: false
+    featured: false,
+    color: "emerald"
   },
   {
     icon: Building2,
@@ -73,7 +75,8 @@ const products = [
     architecture: "Java (Spring Boot) • Oracle/Postgres",
     users: "Universities, Colleges, Schools",
     benefits: ["Operational efficiency", "Real-time reporting", "Reduced admin overhead"],
-    featured: false
+    featured: false,
+    color: "indigo"
   },
   {
     icon: Users,
@@ -89,61 +92,65 @@ const products = [
     architecture: "Node.js • MongoDB • Elasticsearch",
     users: "Sales Teams, Marketing Agencies",
     benefits: ["Higher conversion rates", "Better customer retention", "Data-driven sales strategy"],
-    featured: false
+    featured: false,
+    color: "purple"
   },
 ];
 
 const Products = () => {
   return (
-    <div className="bg-white text-gray-900 font-sans min-h-screen">
+    <div className="bg-[#0B0F19] text-white font-sans min-h-screen relative overflow-hidden">
       <Seo
-        title="Products"
+        title="EcoSystem Products"
         description="Our suite of enterprise-grade platforms for education, assessment, and management."
       />
 
-      {/* Header - Simple & Clean */}
-      <section className="pt-32 pb-20 border-b border-gray-100 bg-gray-50/50">
+      {/* Decorative background */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+
+      {/* Header */}
+      <section className="pt-40 pb-24 border-b border-white/5 relative z-10">
         <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-          <p className="text-sm font-semibold text-blue-600 uppercase tracking-widest mb-4">The Platform</p>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
-            Everything you need to run <br />  a modern digital institution.
+          <p className="text-sm font-bold text-blue-500 uppercase tracking-[0.3em] mb-4">The EcoSystem</p>
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-tight">
+            Infrastructure for the <span className="text-gray-500 italic">Next Generation.</span>
           </h1>
-          <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
-            Integrated applications designed to work together. From admissions to alumni network, we cover the entire lifecycle.
+          <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
+            Integrated applications designed to scale. From AI-driven assessment to institutional-grade resource planning.
           </p>
         </div>
       </section>
 
-      {/* Products List - Zig Zag Technical Layout */}
-      <section className="py-24">
-        <div className="container mx-auto px-6 lg:px-8 space-y-32">
+      {/* Products List */}
+      <section className="py-32 relative z-10">
+        <div className="container mx-auto px-6 lg:px-8 space-y-40">
           {products.map((p, i) => (
-            <div key={p.title} id={p.title.toLowerCase().replace(/\s/g, "-")} className="scroll-mt-32">
-              <div className="grid gap-16 lg:grid-cols-2 items-center">
+            <div key={p.title} id={p.title.toLowerCase().replace(/\s/g, "-")} className="scroll-mt-40 group">
+              <div className="grid gap-20 lg:grid-cols-2 items-center">
 
                 {/* Text Content */}
                 <div className={`${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-900">
-                      <p.icon className="h-5 w-5" />
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="h-14 w-14 rounded-2xl glass flex items-center justify-center text-white border-white/10 group-hover:border-blue-500/50 transition-all">
+                      <p.icon className="h-7 w-7" />
                     </div>
                     {p.featured && (
-                      <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Featured</span>
+                      <Badge className="bg-blue-600/10 text-blue-400 border-blue-500/20 px-3 py-1 text-xs uppercase tracking-widest font-bold">Featured Platform</Badge>
                     )}
                   </div>
 
-                  <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">{p.title}</h2>
-                  <p className="text-lg font-medium text-gray-500 mb-6">{p.tagline}</p>
-                  <p className="text-gray-600 leading-relaxed mb-8">{p.overview}</p>
+                  <h2 className="text-4xl font-bold tracking-tight mb-6">{p.title}</h2>
+                  <p className="text-xl font-medium text-blue-400/80 mb-8">{p.tagline}</p>
+                  <p className="text-gray-400 text-lg leading-relaxed mb-10">{p.overview}</p>
 
-                  <div className="space-y-8">
+                  <div className="space-y-12">
                     {/* Features List */}
                     <div>
-                      <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">Components</h4>
-                      <ul className="grid sm:grid-cols-2 gap-3">
+                      <h4 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em] mb-6">Key Capabilities</h4>
+                      <ul className="grid sm:grid-cols-2 gap-4">
                         {p.features.map(f => (
-                          <li key={f} className="flex items-center gap-2 text-[15px] text-gray-600">
-                            <CheckCircle className="h-4 w-4 text-blue-600 flex-shrink-0" />
+                          <li key={f} className="flex items-center gap-3 text-[15px] text-gray-300">
+                            <div className="h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_10px_#2563EB]" />
                             {f}
                           </li>
                         ))}
@@ -151,19 +158,19 @@ const Products = () => {
                     </div>
 
                     {/* Technical Details Box */}
-                    <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
-                      <div className="flex items-center gap-2 mb-3">
-                        <Code className="h-4 w-4 text-gray-400" />
-                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-widest">Tech Stack</span>
+                    <div className="glass rounded-2xl p-8 border-white/5 group-hover:border-white/10 transition-all">
+                      <div className="flex items-center gap-3 mb-4">
+                        <Code className="h-4 w-4 text-gray-500" />
+                        <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Architecture Stack</span>
                       </div>
-                      <p className="font-mono text-sm text-gray-700">{p.architecture}</p>
+                      <p className="font-mono text-sm text-blue-300 tracking-tight">{p.architecture}</p>
                     </div>
 
                     {/* @ts-ignore */}
                     {p.link && (
-                      <Button asChild size="lg" className="w-full sm:w-auto bg-gray-900 text-white hover:bg-gray-800">
+                      <Button asChild size="lg" className="h-14 px-8 bg-white text-black hover:bg-gray-100 rounded-xl font-bold transition-transform hover:scale-105 active:scale-95">
                         <a href={p.link} target="_blank" rel="noopener noreferrer">
-                          Visit Platform <ArrowRight className="ml-2 h-4 w-4" />
+                          Access Platform <ArrowRight className="ml-2 h-5 w-5" />
                         </a>
                       </Button>
                     )}
@@ -172,40 +179,40 @@ const Products = () => {
 
                 {/* Visual Representation */}
                 <div className={`${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <div className="relative rounded-xl bg-gradient-to-tr from-gray-100 to-gray-50 border border-gray-200 p-2 shadow-lg hover:shadow-xl transition-shadow duration-500">
-                    <div className="absolute top-0 right-0 -m-2 h-24 w-24 bg-blue-500/5 rounded-full blur-3xl" />
+                  <div className="relative rounded-[2.5rem] glass p-4 shadow-2xl group-hover:shadow-blue-500/10 transition-all duration-700 animate-float">
+                    <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600/20 to-accent/20 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
 
                     {/* Abstract Dashboard UI */}
-                    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
+                    <div className="bg-[#0B0F19] rounded-[2rem] border border-white/5 overflow-hidden shadow-inner relative z-10">
                       {/* Window Chrome */}
-                      <div className="bg-gray-50 border-b border-gray-200 px-4 py-3 flex gap-2">
-                        <div className="h-3 w-3 rounded-full bg-gray-200" />
-                        <div className="h-3 w-3 rounded-full bg-gray-200" />
-                        <div className="h-3 w-3 rounded-full bg-gray-200" />
+                      <div className="bg-white/5 border-b border-white/5 px-6 py-4 flex gap-2">
+                        <div className="h-3 w-3 rounded-full bg-red-500/50" />
+                        <div className="h-3 w-3 rounded-full bg-yellow-500/50" />
+                        <div className="h-3 w-3 rounded-full bg-green-500/50" />
                       </div>
 
                       {/* Wireframe Body */}
-                      <div className="p-8 space-y-6 bg-white min-h-[300px]">
+                      <div className="p-10 space-y-8 min-h-[400px]">
                         <div className="flex justify-between items-end">
-                          <div className="space-y-2">
-                            <div className="h-4 w-32 bg-gray-100 rounded" />
-                            <div className="h-8 w-48 bg-gray-900 rounded" />
+                          <div className="space-y-3">
+                            <div className="h-4 w-32 bg-white/5 rounded-full" />
+                            <div className="h-10 w-64 bg-white/10 rounded-xl" />
                           </div>
-                          <div className="h-8 w-24 bg-blue-600 rounded" />
+                          <div className="h-12 w-32 bg-blue-600/20 border border-blue-500/30 rounded-xl" />
                         </div>
 
-                        <div className="grid grid-cols-3 gap-4 py-4">
+                        <div className="grid grid-cols-3 gap-6 py-4">
                           {[1, 2, 3].map(k => (
-                            <div key={k} className="p-4 rounded border border-gray-100 bg-gray-50/50">
-                              <div className="h-8 w-8 bg-white border border-gray-200 rounded mb-3" />
-                              <div className="h-2 w-16 bg-gray-200 rounded" />
+                            <div key={k} className="p-6 rounded-2xl border border-white/5 bg-white/[0.02]">
+                              <div className="h-10 w-10 bg-white/5 rounded-lg mb-4" />
+                              <div className="h-3 w-20 bg-white/10 rounded-full" />
                             </div>
                           ))}
                         </div>
 
-                        <div className="h-32 bg-gray-50 border border-gray-100 rounded flex items-end px-4 pt-4 gap-2">
+                        <div className="h-40 bg-white/[0.02] border border-white/5 rounded-2xl flex items-end px-6 pt-6 gap-3">
                           {[40, 70, 45, 90, 60, 80, 50, 95].map((h, k) => (
-                            <div key={k} className="flex-1 bg-blue-100 rounded-t border-t border-x border-blue-200" style={{ height: `${h}%` }} />
+                            <div key={k} className="flex-1 bg-blue-600/20 rounded-t-lg border-t border-x border-blue-500/20 shadow-[0_0_20px_rgba(37,99,235,0.1)]" style={{ height: `${h}%` }} />
                           ))}
                         </div>
                       </div>
@@ -219,15 +226,16 @@ const Products = () => {
       </section>
 
       {/* Enterprise CTA */}
-      <section className="py-24 border-t border-gray-100 bg-gray-50">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Built for scale.</h2>
-          <div className="flex justify-center gap-4">
-            <Button asChild className="bg-gray-900 text-white hover:bg-gray-800 h-12 px-8">
-              <Link to="/contact">Request Demo</Link>
+      <section className="py-40 border-t border-white/5 relative">
+        <div className="absolute inset-0 bg-blue-600/5 blur-[120px] rounded-full translate-y-20 pointer-events-none" />
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <h2 className="text-4xl md:text-6xl font-bold mb-10">Ready to transform?</h2>
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <Button asChild size="lg" className="h-16 px-10 bg-blue-600 text-white hover:bg-blue-700 rounded-2xl font-bold shadow-[0_0_30px_rgba(37,99,235,0.3)]">
+              <Link to="/contact">Request Executive Demo</Link>
             </Button>
-            <Button asChild variant="outline" className="bg-white border-gray-300 h-12 px-8">
-              <Link to="/technology">View Tech Stack</Link>
+            <Button asChild variant="outline" size="lg" className="h-16 px-10 glass border-white/10 text-white hover:bg-white/5 rounded-2xl font-bold">
+              <Link to="/technology">Technical Specifications</Link>
             </Button>
           </div>
         </div>

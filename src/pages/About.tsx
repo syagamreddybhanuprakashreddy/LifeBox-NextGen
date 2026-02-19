@@ -4,88 +4,91 @@ import { Target, Eye, ShieldCheck, Users, Award, Building2 } from "lucide-react"
 import Seo from "@/components/Seo";
 
 const stats = [
-  { label: "Active Users", value: "10k+" },
-  { label: "Institutions", value: "50+" },
-  { label: "Uptime", value: "99.9%" },
-  { label: "Data Processed", value: "1TB+" },
+  { label: "Active Nodes", value: "10k+" },
+  { label: "Global Partners", value: "50+" },
+  { label: "Core Uptime", value: "99.99%" },
+  { label: "Data Integrity", value: "SOC-2" },
 ];
 
 const values = [
   {
     icon: ShieldCheck,
-    title: "Uncompromising Security",
-    desc: "We treat data privacy and security as foundational, not an afterthought. SOC-2 compliant practices tailored for institution-critical data."
+    title: "Zero-Trust Security",
+    desc: "We treat data privacy as foundational. Our Zero-Trust architecture ensures every bit is encrypted and every interaction is authenticated."
   },
   {
     icon: Users,
-    title: "User-Centric Design",
-    desc: "Complex enterprise software doesn't have to be complicated. We obsess over usability and accessibility for all stakeholders."
+    title: "User-Centric Complexity",
+    desc: "We embrace complexity to simplify user experience. Powerful enterprise capabilities shouldn't mean a steep learning curve."
   },
   {
     icon: Award,
-    title: "Engineering Excellence",
-    desc: "We write clean, maintainable, and scalable code. Our technical debt is low, and our performance standards are high."
+    title: "Atomic Excellence",
+    desc: "Engineering at LifeBox means writing atomic, resilient, and high-performance code that stands the test of global scale."
   }
 ];
 
 const About = () => {
   return (
-    <div className="bg-white text-gray-900 font-sans min-h-screen">
+    // Explicitly set bg-black and text-white here to override any conflicting styles
+    <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden relative selection:bg-blue-500/30">
       <Seo
-        title="About Us"
+        title="Our Protocol"
         description="LifeBox NextGen is an enterprise technology company building the digital backbone for modern institutions."
       />
 
+      {/* Decorative Glow */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+
       {/* Hero Section */}
-      <section className="pt-32 pb-20 border-b border-gray-100 bg-gray-50/50">
-        <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
-          <p className="text-sm font-semibold text-blue-600 uppercase tracking-widest mb-4">Our Story</p>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 mb-8">
-            Building the digital backbone <br /> for modern institutions.
+      <section className="pt-40 pb-24 border-b border-white/5 relative z-10 text-center bg-black">
+        <div className="container mx-auto px-6 lg:px-8 max-w-4xl">
+          <p className="text-sm font-bold text-blue-500 uppercase tracking-[0.3em] mb-4">The Protocol</p>
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 text-white">
+            Building the <span className="text-gray-500 italic">NextGen</span> <br /> Digital Backbone.
           </h1>
-          <p className="text-xl text-gray-500 leading-relaxed mx-auto max-w-2xl">
-            LifeBox NextGen was founded on a simple premise: Enterprise software should be powerful, scalable, and delightful to use.
+          <p className="text-xl text-gray-400 leading-relaxed mx-auto max-w-2xl">
+            LifeBox NextGen was architected on a single premise: Enterprise infrastructure should be invisible, resilient, and undeniably powerful.
           </p>
         </div>
       </section>
 
       {/* Stats Grid */}
-      <section className="py-12 border-b border-gray-100">
+      <section className="py-16 border-b border-white/5 relative z-10 bg-black">
         <div className="container mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center divide-x divide-white/5">
             {stats.map(s => (
               <div key={s.label} className="px-4">
-                <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-1">{s.value}</div>
-                <div className="text-sm font-medium text-gray-500 uppercase tracking-wide">{s.label}</div>
+                <div className="text-4xl font-extrabold mb-2 font-mono text-white">{s.value}</div>
+                <div className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">{s.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Mission & Vision split */}
-      <section className="py-24">
+      {/* Mission & Vision */}
+      <section className="py-32 relative z-10 bg-black">
         <div className="container mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <div>
-              <div className="h-12 w-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
-                <Target className="h-6 w-6" />
+          <div className="grid md:grid-cols-2 gap-24 items-center">
+            <div className="group">
+              <div className="h-16 w-16 glass text-blue-500 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xl border border-blue-500/20">
+                <Target className="h-8 w-8" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Mission</h2>
-              <p className="text-lg text-gray-500 leading-relaxed mb-6">
-                To deliver enterprise-grade digital infrastructure that empowers organizations to operate efficiently, scale confidently, and innovate continuously.
+              <h2 className="text-4xl font-bold mb-6 text-white">Our Mission</h2>
+              <p className="text-xl text-gray-400 leading-relaxed mb-8">
+                To deliver enterprise-grade digital infrastructure that empowers organizations to operate with atomic precision and infinite scale.
               </p>
-              <p className="text-lg text-gray-500 leading-relaxed">
-                We believe that technology should be an enabler, not a bottleneck. Our platforms are designed to remove friction and unlock potential.
-              </p>
+              <div className="h-1 w-20 bg-blue-600 rounded-full group-hover:w-40 transition-all" />
             </div>
-            <div className="bg-gray-50 rounded-3xl p-8 lg:p-12 border border-gray-100">
-              <div className="h-12 w-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6">
-                <Eye className="h-6 w-6" />
+            <div className="glass rounded-[2.5rem] p-12 lg:p-16 border border-white/10 relative group overflow-hidden bg-[#0A0A0A]">
+              <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="h-16 w-16 glass text-blue-400 rounded-2xl flex items-center justify-center mb-10 group-hover:bg-blue-400 group-hover:text-white transition-all relative z-10 shadow-xl border border-blue-400/20">
+                <Eye className="h-8 w-8" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Vision</h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                To become the trusted technology partner for institutions and enterprises across sectors — building platforms that define the next generation of digital operations.
+              <h2 className="text-4xl font-bold mb-6 relative z-10 text-white">Our Vision</h2>
+              <p className="text-xl text-gray-400 leading-relaxed relative z-10">
+                To become the trusted architectural partner for the world's most innovative institutions — building the platforms that bridge the gap between present needs and future scale.
               </p>
             </div>
           </div>
@@ -93,20 +96,18 @@ const About = () => {
       </section>
 
       {/* Core Values */}
-      <section className="py-24 bg-gray-900 text-white">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold mb-4">Engineering Values</h2>
-            <p className="text-gray-400 text-lg">
-              Our culture is built on technical excellence and customer obsession.
-            </p>
-          </div>
+      <section className="py-32 bg-[#050505] border-y border-white/5 relative">
+        <div className="container mx-auto px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold mb-4 uppercase tracking-tighter text-white">Engineering Values</h2>
+          <p className="text-gray-500 text-lg mb-20 max-w-xl mx-auto font-medium">
+            Our culture is defined by technical obsession and zero-compromise excellence.
+          </p>
 
           <div className="grid md:grid-cols-3 gap-8">
             {values.map((v, i) => (
-              <div key={v.title} className="bg-gray-800/50 border border-gray-700 p-8 rounded-2xl">
-                <v.icon className="h-8 w-8 text-blue-400 mb-6" />
-                <h3 className="text-xl font-bold text-white mb-3">{v.title}</h3>
+              <div key={v.title} className="glass p-10 rounded-[2rem] border border-white/10 bg-[#0A0A0A] text-left hover:border-blue-500/30 transition-all group">
+                <v.icon className="h-10 w-10 text-blue-500 mb-8" />
+                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-400 transition-colors">{v.title}</h3>
                 <p className="text-gray-400 leading-relaxed">
                   {v.desc}
                 </p>
@@ -116,31 +117,32 @@ const About = () => {
         </div>
       </section>
 
-      {/* Leadership / Team Abstract */}
-      <section className="py-24 border-b border-gray-100">
+      {/* Leadership */}
+      <section className="py-32 relative z-10 bg-black">
         <div className="container mx-auto px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-16">Leadership</h2>
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
+          <h2 className="text-4xl font-bold mb-20 text-white">Executive Leadership</h2>
+          <div className="flex justify-center">
             {[
               {
                 title: "Bhanu Prakash Syagam Reddy",
                 role: "Founder & CEO",
-                image: "https://i.ibb.co/JR5JnxxD/Whats-App-Image-2026-02-15-at-09-32-05.jpg"
-              },
-              { title: "Harsha Bala Subramanian", role: "CTO", image: "https://i.ibb.co/cc1680yw/Whats-App-Image-2026-02-15-at-09-42-04.jpg" },
-              { title: "Head of Product", role: "Product" },
-              { title: "Uday Kiran K", role: "Head of Operations", image: "https://i.ibb.co/5WzKB6yg/Whats-App-Image-2025-09-27-at-10-32-48.jpg" },
-              { title: "Head of QA & Security", role: "Testing & Compliance" }
+                image: "https://i.ibb.co/JR5JnxxD/Whats-App-Image-2026-02-15-at-09-32-05.jpg",
+                quote: "Innovation is not about complexity, it's about making the complex invisible."
+              }
             ].map((l, i) => (
-              <div key={i} className="group flex flex-col items-center">
-                <Avatar className="h-48 w-48 rounded-2xl mb-4 bg-gray-100">
-                  <AvatarImage src={l.image} alt={l.title} className="object-cover" />
-                  <AvatarFallback className="rounded-2xl bg-gray-100">
-                    <Building2 className="h-12 w-12 text-gray-300" />
-                  </AvatarFallback>
-                </Avatar>
-                <h3 className="font-bold text-gray-900">{l.title}</h3>
-                <p className="text-sm text-gray-500">{l.role}</p>
+              <div key={i} className="group flex flex-col items-center max-w-lg">
+                <div className="relative mb-8">
+                  <div className="absolute inset-0 bg-blue-600 rounded-full blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity duration-700" />
+                  <Avatar className="h-64 w-64 rounded-full border-2 border-white/10 group-hover:border-blue-500/50 transition-all duration-500 ring-4 ring-black shadow-2xl">
+                    <AvatarImage src={l.image} alt={l.title} className="object-cover" />
+                    <AvatarFallback className="rounded-full bg-white/5">
+                      <Building2 className="h-20 w-20 text-gray-700" />
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
+                <h3 className="text-3xl font-bold text-white mb-2">{l.title}</h3>
+                <p className="text-sm font-bold text-blue-500 uppercase tracking-[0.2em] mb-6">{l.role}</p>
+                <p className="text-lg text-gray-400 italic font-light leading-relaxed">"{l.quote}"</p>
               </div>
             ))}
           </div>

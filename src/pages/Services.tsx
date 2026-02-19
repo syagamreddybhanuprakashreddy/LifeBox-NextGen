@@ -10,7 +10,7 @@ import Seo from "@/components/Seo";
 const services = [
   {
     icon: Server,
-    title: "Enterprise Solutions",
+    title: "Enterprise Infrastructure",
     description: "Fragmented systems reduce productivity. We build integrated ERPs and portals that unify operations under a single digital infrastructure.",
     deliverables: ["Custom ERP Systems", "Employee Portals", "Workflow Automation"],
     tech: ["React", "PostgreSQL", "Docker"]
@@ -24,7 +24,7 @@ const services = [
   },
   {
     icon: Cloud,
-    title: "Cloud Interface",
+    title: "Cloud Orchestration",
     description: "Legacy infrastructure limits growth. We execute secure cloud migrations and set up auto-scaling architectures.",
     deliverables: ["AWS/GCP Migration", "DevOps & CI/CD", "Infrastructure as Code"],
     tech: ["Terraform", "Kubernetes", "AWS"]
@@ -47,45 +47,48 @@ const services = [
 
 const Services = () => {
   return (
-    <div className="bg-white text-gray-900 font-sans min-h-screen">
+    <div className="bg-[#0B0F19] text-white font-sans min-h-screen relative overflow-hidden">
       <Seo
-        title="Services"
+        title="Engineering Services"
         description="End-to-end engineering services. From custom software development to cloud infrastructure."
       />
 
+      {/* Decorative Glow */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+
       {/* Services Header */}
-      <section className="pt-32 pb-20 border-b border-gray-100 bg-gray-50/50">
+      <section className="pt-40 pb-24 border-b border-white/5 relative z-10">
         <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-          <p className="text-sm font-semibold text-blue-600 uppercase tracking-widest mb-4">Our Expertise</p>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
-            Engineering services <br /> for high-scale problems.
+          <p className="text-sm font-bold text-blue-500 uppercase tracking-[0.3em] mb-4">Our Expertise</p>
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-tight">
+            Engineering for <br /> <span className="text-gray-500 italic">High-Scale Solutions.</span>
           </h1>
-          <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
-            We don't just write code. We architect systems that drive business outcomes.
+          <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
+            We don't just write code. We architect resilient systems that define modern enterprise operations.
           </p>
         </div>
       </section>
 
       {/* Main Services Grid */}
-      <section className="py-24">
+      <section className="py-32 relative z-10">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((s, i) => (
-              <div key={s.title} className="group p-8 rounded-2xl border border-gray-200 bg-white hover:border-gray-300 hover:shadow-lg transition-all duration-300 flex flex-col items-start">
-                <div className="h-12 w-12 rounded-lg bg-gray-100 flex items-center justify-center text-gray-900 mb-6 group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                  <s.icon className="h-6 w-6" />
+              <div key={s.title} className="group p-10 rounded-[2rem] glass glass-hover flex flex-col items-start animate-fade-in mouse-glow">
+                <div className="h-14 w-14 rounded-2xl bg-blue-600/10 flex items-center justify-center text-blue-500 mb-8 border border-blue-500/20 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 shadow-xl">
+                  <s.icon className="h-7 w-7" />
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{s.title}</h3>
-                <p className="text-gray-500 mb-8 leading-relaxed text-sm flex-grow">{s.description}</p>
+                <h3 className="text-2xl font-bold mb-4">{s.title}</h3>
+                <p className="text-gray-400 mb-10 leading-relaxed text-sm flex-grow">{s.description}</p>
 
-                <div className="w-full space-y-6">
-                  <div className="pt-6 border-t border-gray-100">
-                    <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Deliverables</h4>
-                    <ul className="space-y-2">
+                <div className="w-full space-y-8">
+                  <div className="pt-8 border-t border-white/5">
+                    <h4 className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4">Core Deliverables</h4>
+                    <ul className="space-y-3">
                       {s.deliverables.map(d => (
-                        <li key={d} className="flex items-center gap-2 text-sm text-gray-700 font-medium">
-                          <div className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+                        <li key={d} className="flex items-center gap-3 text-[13px] text-gray-300 font-medium">
+                          <div className="h-1 w-3 bg-blue-600 rounded-full" />
                           {d}
                         </li>
                       ))}
@@ -94,7 +97,7 @@ const Services = () => {
 
                   <div className="flex flex-wrap gap-2">
                     {s.tech.map(t => (
-                      <span key={t} className="px-2 py-1 bg-gray-50 border border-gray-200 rounded text-[10px] uppercase font-mono text-gray-500">
+                      <span key={t} className="px-3 py-1 glass rounded-full text-[10px] uppercase font-bold tracking-widest text-blue-400/80">
                         {t}
                       </span>
                     ))}
@@ -104,13 +107,14 @@ const Services = () => {
             ))}
 
             {/* Call to Action Card */}
-            <div className="p-8 rounded-2xl border border-blue-100 bg-blue-50 flex flex-col justify-center items-start">
-              <h3 className="text-2xl font-bold text-blue-900 mb-4">Need something specific?</h3>
-              <p className="text-blue-700 mb-8 leading-relaxed">
-                We specialize in solving unique technical challenges. Let's discuss your specific requirements.
+            <div className="p-10 rounded-[2rem] bg-blue-600 flex flex-col justify-center items-start shadow-[0_0_50px_rgba(37,99,235,0.3)] group overflow-hidden relative">
+              <div className="absolute -inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <h3 className="text-4xl font-extrabold text-white mb-6 relative z-10">Custom <br />Request?</h3>
+              <p className="text-blue-100 mb-10 leading-relaxed text-lg relative z-10">
+                Architecting unique solutions for zero-compromise scalability.
               </p>
-              <Button asChild className="bg-blue-600 text-white hover:bg-blue-700 h-12 px-6 w-full">
-                <Link to="/contact">Book Technical Call <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              <Button asChild className="bg-white text-blue-600 hover:bg-blue-50 h-14 px-8 w-full rounded-2xl font-bold text-lg relative z-10 shadow-xl transition-transform hover:scale-[1.02]">
+                <Link to="/contact">Consult an Engineer</Link>
               </Button>
             </div>
           </div>
@@ -118,60 +122,63 @@ const Services = () => {
       </section>
 
       {/* Methodology Section */}
-      <section className="py-24 border-t border-gray-100">
+      <section className="py-32 border-t border-white/5 relative">
         <div className="container mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-24 items-center">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-6">Our Engineering Approach</h2>
-              <p className="text-lg text-gray-500 mb-8 max-w-lg leading-relaxed">
-                We follow a rigorous, transparent process to ensure every project is delivered on time and bug-free.
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-8">Our Engineering Protocol</h2>
+              <p className="text-xl text-gray-400 mb-12 max-w-lg leading-relaxed">
+                We follow a rigorous protocol to ensure every deployment is atomic, secure, and resilient.
               </p>
 
-              <div className="space-y-8">
+              <div className="space-y-12">
                 {[
-                  { title: "Discovery & Architecture", desc: "Detailed technical specs and system design before a single line of code is written." },
-                  { title: "Iterative Development", desc: "Two-week sprints with demonstrable progress and continuous feedback loops." },
-                  { title: "Quality Assurance", desc: "Automated testing, manual reviews, and security audits integrated into the pipeline." },
-                  { title: "Deployment & Scale", desc: "Production rollout strategies that ensure zero downtime and instant scalability." }
+                  { title: "Technical Discovery", desc: "Detailed specifications and infrastructure diagrams before first commit." },
+                  { title: "Atomic Development", desc: "Rigorous sprints with continuous integration and real-time observability." },
+                  { title: "Audit & Validation", desc: "Multi-layer security audits and automated performance validation." },
+                  { title: "Scale Deployment", desc: "Global rollout strategies with zero-downtime guarantees." }
                 ].map((item, index) => (
-                  <div key={index} className="flex gap-4">
-                    <div className="flex-shrink-0 h-8 w-8 rounded-full border border-gray-200 bg-gray-50 flex items-center justify-center font-mono text-xs font-bold text-gray-600">
-                      {index + 1}
+                  <div key={index} className="flex gap-6 group">
+                    <div className="flex-shrink-0 h-12 w-12 rounded-2xl glass border-white/5 flex items-center justify-center font-mono text-xs font-bold text-blue-500 group-hover:border-blue-500/50 transition-all">
+                      {String(index + 1).padStart(2, '0')}
                     </div>
                     <div>
-                      <h4 className="text-base font-bold text-gray-900 mb-1">{item.title}</h4>
-                      <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                      <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                      <p className="text-gray-500 leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="relative">
-              <div className="absolute inset-0 bg-blue-100 rounded-3xl transform rotate-3" />
-              <div className="relative bg-gray-900 rounded-3xl p-8 lg:p-12 shadow-2xl text-white">
-                <pre className="font-mono text-sm leading-relaxed text-blue-100 overflow-x-auto">
-                  {`const Methodology = {
-  efficiency: "High",
-  security: "Enterprise-Grade",
-  transparency: 100,
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative glass rounded-[2.5rem] p-10 lg:p-14 overflow-hidden shadow-2xl animate-float">
+                <pre className="font-mono text-sm leading-relaxed text-blue-300 overflow-x-auto">
+                  {`const EnterpriseProtocol = {
+  efficiency: "Sub-atomic",
+  security: "Zero-Trust",
+  scalability: "Infinite",
   
-  deploy: async () => {
-    await analyze();
-    await build();
-    await test();
-    return "Success";
+  deploy: async (params) => {
+    const audit = await verify(params);
+    if (audit.passed) {
+      return await cloud.orchestrate({
+        region: "Global",
+        resilience: 1.0
+      });
+    }
   }
 };`}
                 </pre>
-                <div className="mt-8 pt-8 border-t border-gray-800">
-                  <div className="flex items-center gap-4">
-                    <div className="h-10 w-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
-                      <CheckCircle2 className="h-5 w-5" />
+                <div className="mt-12 pt-12 border-t border-white/10">
+                  <div className="flex items-center gap-6">
+                    <div className="h-14 w-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                      <CheckCircle2 className="h-7 w-7" />
                     </div>
                     <div>
-                      <div className="text-sm font-bold">Guaranteed Delivery</div>
-                      <div className="text-xs text-gray-400">On Time. On Budget.</div>
+                      <div className="text-lg font-bold">Guaranteed Uptime</div>
+                      <div className="text-sm text-gray-500 font-mono">SLA: 99.999% Availability</div>
                     </div>
                   </div>
                 </div>

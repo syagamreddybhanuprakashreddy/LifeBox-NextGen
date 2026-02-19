@@ -6,7 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, MapPin, Phone, ArrowRight, MessageSquare } from "lucide-react";
+import { Mail, MapPin, ArrowRight } from "lucide-react";
 import Seo from "@/components/Seo";
 
 const formSchema = z.object({
@@ -30,10 +30,7 @@ const Contact = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-
-    // Construct mailto link
-    const subject = encodeURIComponent(`New Enterprise Inquiry: ${values.company}`);
+    const subject = encodeURIComponent(`Enterprise Inquiry: ${values.company}`);
     const body = encodeURIComponent(
       `Name: ${values.name}\n` +
       `Email: ${values.email}\n` +
@@ -42,9 +39,6 @@ const Contact = () => {
     );
 
     const mailtoLink = `mailto:careers@lifeboxnetgen.co.site?subject=${subject}&body=${body}`;
-
-    // Create a temporary link to trigger the mail client
-    // This is often more reliable than window.location.href
     const link = document.createElement('a');
     link.href = mailtoLink;
     document.body.appendChild(link);
@@ -53,26 +47,26 @@ const Contact = () => {
 
     toast({
       title: "Opening Email Client",
-      description: "Drafting your request in your default mail app...",
+      description: "Drafting your request...",
     });
 
     form.reset();
   }
 
   return (
-    <div className="bg-white text-gray-900 font-sans min-h-screen">
+    <div className="bg-black text-white font-sans min-h-screen">
       <Seo
         title="Contact Sales"
         description="Get in touch with LifeBox NextGen enterprise team."
       />
 
-      <section className="pt-32 pb-20 border-b border-gray-100 bg-gray-50/50">
+      <section className="pt-32 pb-20 border-b border-white/10 bg-black">
         <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
-          <p className="text-sm font-semibold text-blue-600 uppercase tracking-widest mb-4">Contact us</p>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6">
+          <p className="text-sm font-semibold text-blue-500 uppercase tracking-widest mb-4">Contact us</p>
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
             Partner with LifeBox.
           </h1>
-          <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Ready to upgrade your infrastructure? Our engineering team is here to help you architect the perfect solution.
           </p>
         </div>
@@ -84,39 +78,38 @@ const Contact = () => {
 
             {/* Contact Details */}
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in touch</h2>
-              <p className="text-gray-500 mb-12 leading-relaxed">
+              <h2 className="text-2xl font-bold text-white mb-6">Get in touch</h2>
+              <p className="text-gray-400 mb-12 leading-relaxed">
                 Whether you have a technical question or need a custom enterprise quote, our team is ready to assist.
               </p>
 
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 flex-shrink-0">
+                  <div className="h-10 w-10 rounded-md bg-white/10 flex items-center justify-center text-white flex-shrink-0">
                     <Mail className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Email Us</h3>
-                    <p className="text-sm text-gray-500 mb-1">For all inquiries</p>
-                    <a href="mailto:careers@lifeboxnetgen.co.site" className="text-blue-600 font-medium hover:underline">careers@lifeboxnetgen.co.site</a>
+                    <h3 className="font-semibold text-white mb-1">Email Us</h3>
+                    <p className="text-sm text-gray-400 mb-1">For all inquiries</p>
+                    <a href="mailto:careers@lifeboxnetgen.co.site" className="text-blue-500 font-medium hover:text-blue-400">careers@lifeboxnetgen.co.site</a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-900 flex-shrink-0">
+                  <div className="h-10 w-10 rounded-md bg-white/10 flex items-center justify-center text-white flex-shrink-0">
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">HQ</h3>
-                    <p className="text-sm text-gray-500">
+                    <h3 className="font-semibold text-white mb-1">HQ</h3>
+                    <p className="text-sm text-gray-400">
                       <a
                         href="https://maps.app.goo.gl/asDaoeCWMkFf2Sjo9"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-blue-600 transition-colors"
+                        className="hover:text-blue-500 transition-colors"
                       >
                         LifeBox NextGen Pvt. Ltd.<br />
-                        8-252, Dasaripalem village, post, Rompicherlla Mandal<br />
-                        Vipperla, Narasaraopet, Andhra Pradesh 522615
+                        Narasaraopet, Andhra Pradesh 522615
                       </a>
                     </p>
                   </div>
@@ -125,7 +118,7 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-gray-50 rounded-2xl p-8 lg:p-10 border border-gray-200">
+            <div className="bg-white/5 rounded-xl p-8 lg:p-10 border border-white/10">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
@@ -134,9 +127,9 @@ const Contact = () => {
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700">Full Name</FormLabel>
+                          <FormLabel className="text-gray-300">Full Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Jane Doe" {...field} className="bg-white border-gray-300 focus:border-blue-500" />
+                            <Input placeholder="Jane Doe" {...field} className="bg-black/20 border-white/10 text-white placeholder:text-gray-600 focus:border-blue-500 focus:ring-blue-500/20" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -147,9 +140,9 @@ const Contact = () => {
                       name="company"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700">Company</FormLabel>
+                          <FormLabel className="text-gray-300">Company</FormLabel>
                           <FormControl>
-                            <Input placeholder="Acme Corp" {...field} className="bg-white border-gray-300 focus:border-blue-500" />
+                            <Input placeholder="Acme Corp" {...field} className="bg-black/20 border-white/10 text-white placeholder:text-gray-600 focus:border-blue-500 focus:ring-blue-500/20" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -162,9 +155,9 @@ const Contact = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700">Work Email</FormLabel>
+                        <FormLabel className="text-gray-300">Work Email</FormLabel>
                         <FormControl>
-                          <Input placeholder="jane@acme.com" {...field} className="bg-white border-gray-300 focus:border-blue-500" />
+                          <Input placeholder="jane@acme.com" {...field} className="bg-black/20 border-white/10 text-white placeholder:text-gray-600 focus:border-blue-500 focus:ring-blue-500/20" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -176,11 +169,11 @@ const Contact = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700">How can we help?</FormLabel>
+                        <FormLabel className="text-gray-300">How can we help?</FormLabel>
                         <FormControl>
                           <Textarea
                             placeholder="Tell us about your infrastructure needs..."
-                            className="resize-none min-h-[120px] bg-white border-gray-300 focus:border-blue-500"
+                            className="resize-none min-h-[120px] bg-black/20 border-white/10 text-white placeholder:text-gray-600 focus:border-blue-500 focus:ring-blue-500/20"
                             {...field}
                           />
                         </FormControl>
@@ -189,7 +182,7 @@ const Contact = () => {
                     )}
                   />
 
-                  <Button type="submit" className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium text-base">
+                  <Button type="submit" className="w-full h-12 bg-white text-black hover:bg-gray-200 font-medium text-base rounded-md">
                     Send Request <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </form>
