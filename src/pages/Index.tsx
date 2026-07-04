@@ -218,12 +218,33 @@ const Index = () => {
       {/* --- TRUST TICKER --- */}
       <section className="py-16 border-y border-white/10 bg-black">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-xs font-bold text-gray-600 uppercase tracking-[0.3em] mb-10">Trusted By Industry Leaders</p>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-30">
-            <span className="text-2xl font-mono font-bold text-white">ACME<span className="text-gray-600">CORP</span></span>
-            <span className="text-2xl font-mono font-bold text-white">GLOBAL<span className="text-gray-600">SYS</span></span>
-            <span className="text-2xl font-mono font-bold text-white">VERTEX<span className="text-gray-600">EDU</span></span>
-            <span className="text-2xl font-mono font-bold text-white">ALPHA<span className="text-gray-600">NET</span></span>
+          <p className="text-xs font-bold text-gray-600 uppercase tracking-[0.3em] mb-10">Our Partner Companies</p>
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-80">
+            {/* Beliebt */}
+            <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all duration-500 cursor-default">
+              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/20">B</div>
+              <span className="text-2xl font-bold text-white tracking-tight">Beliebt</span>
+            </div>
+            {/* NextGenFreedu */}
+            <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all duration-500 cursor-default">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20">N</div>
+              <span className="text-2xl font-bold text-white tracking-tight">NextGen<span className="font-light">Freedu</span></span>
+            </div>
+            {/* Chandhan Nilayam */}
+            <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all duration-500 cursor-default">
+              <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-green-600 rounded-sm rotate-45 flex items-center justify-center shadow-lg shadow-emerald-500/20 mx-1"><span className="-rotate-45 text-white font-bold text-lg">C</span></div>
+              <span className="text-2xl font-bold text-white tracking-tight">Chandhan<span className="text-emerald-400 font-light">Nilayam</span></span>
+            </div>
+            {/* Red Sandel */}
+            <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all duration-500 cursor-default">
+              <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-orange-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-red-500/20">R</div>
+              <span className="text-2xl font-bold text-white tracking-tight">Red Sandel</span>
+            </div>
+            {/* BSS */}
+            <div className="flex items-center gap-3 grayscale hover:grayscale-0 transition-all duration-500 cursor-default">
+              <div className="w-10 h-10 border-2 border-blue-400 rounded-lg flex items-center justify-center text-blue-400 font-bold text-xl shadow-lg shadow-blue-400/20">B</div>
+              <span className="text-2xl font-bold text-white tracking-widest">BSS</span>
+            </div>
           </div>
         </div>
       </section>
