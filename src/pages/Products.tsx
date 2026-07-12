@@ -99,147 +99,66 @@ const products = [
 
 const Products = () => {
   return (
-    <div className="bg-[#0B0F19] text-white font-sans min-h-screen relative overflow-hidden">
-      <Seo
-        title="EcoSystem Products"
-        description="Our suite of enterprise-grade platforms for education, assessment, and management."
-      />
-
-      {/* Decorative background */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
-
-      {/* Header */}
-      <section className="pt-40 pb-24 border-b border-white/5 relative z-10">
-        <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-          <p className="text-sm font-bold text-blue-500 uppercase tracking-[0.3em] mb-4">The EcoSystem</p>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-tight">
-            Infrastructure for the <span className="text-gray-500 italic">Next Generation.</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
-            Integrated applications designed to scale. From AI-driven assessment to institutional-grade resource planning.
-          </p>
-        </div>
-      </section>
-
-      {/* Products List */}
-      <section className="py-32 relative z-10">
-        <div className="container mx-auto px-6 lg:px-8 space-y-40">
-          {products.map((p, i) => (
-            <div key={p.title} id={p.title.toLowerCase().replace(/\s/g, "-")} className="scroll-mt-40 group">
-              <div className="grid gap-20 lg:grid-cols-2 items-center">
-
-                {/* Text Content */}
-                <div className={`${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="h-14 w-14 rounded-2xl glass flex items-center justify-center text-white border-white/10 group-hover:border-blue-500/50 transition-all">
-                      <p.icon className="h-7 w-7" />
-                    </div>
-                    {p.featured && (
-                      <Badge className="bg-blue-600/10 text-blue-400 border-blue-500/20 px-3 py-1 text-xs uppercase tracking-widest font-bold">Featured Platform</Badge>
-                    )}
-                  </div>
-
-                  <h2 className="text-4xl font-bold tracking-tight mb-6">{p.title}</h2>
-                  <p className="text-xl font-medium text-blue-400/80 mb-8">{p.tagline}</p>
-                  <p className="text-gray-400 text-lg leading-relaxed mb-10">{p.overview}</p>
-
-                  <div className="space-y-12">
-                    {/* Features List */}
-                    <div>
-                      <h4 className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em] mb-6">Key Capabilities</h4>
-                      <ul className="grid sm:grid-cols-2 gap-4">
-                        {p.features.map(f => (
-                          <li key={f} className="flex items-center gap-3 text-[15px] text-gray-300">
-                            <div className="h-1.5 w-1.5 rounded-full bg-blue-500 shadow-[0_0_10px_#2563EB]" />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Technical Details Box */}
-                    <div className="glass rounded-2xl p-8 border-white/5 group-hover:border-white/10 transition-all">
-                      <div className="flex items-center gap-3 mb-4">
-                        <Code className="h-4 w-4 text-gray-500" />
-                        <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Architecture Stack</span>
-                      </div>
-                      <p className="font-mono text-sm text-blue-300 tracking-tight">{p.architecture}</p>
-                    </div>
-
-                    {/* @ts-ignore */}
-                    {p.link && (
-                      <Button asChild size="lg" className="h-14 px-8 bg-white text-black hover:bg-gray-100 rounded-xl font-bold transition-transform hover:scale-105 active:scale-95">
-                        <a href={p.link} target="_blank" rel="noopener noreferrer">
-                          Access Platform <ArrowRight className="ml-2 h-5 w-5" />
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                </div>
-
-                {/* Visual Representation */}
-                <div className={`${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <div className="relative rounded-[2.5rem] glass p-4 shadow-2xl group-hover:shadow-blue-500/10 transition-all duration-700 animate-float">
-                    <div className="absolute -inset-1 bg-gradient-to-tr from-blue-600/20 to-accent/20 rounded-[2.5rem] blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                    {/* Abstract Dashboard UI */}
-                    <div className="bg-[#0B0F19] rounded-[2rem] border border-white/5 overflow-hidden shadow-inner relative z-10">
-                      {/* Window Chrome */}
-                      <div className="bg-white/5 border-b border-white/5 px-6 py-4 flex gap-2">
-                        <div className="h-3 w-3 rounded-full bg-red-500/50" />
-                        <div className="h-3 w-3 rounded-full bg-yellow-500/50" />
-                        <div className="h-3 w-3 rounded-full bg-green-500/50" />
-                      </div>
-
-                      {/* Wireframe Body */}
-                      <div className="p-10 space-y-8 min-h-[400px]">
-                        <div className="flex justify-between items-end">
-                          <div className="space-y-3">
-                            <div className="h-4 w-32 bg-white/5 rounded-full" />
-                            <div className="h-10 w-64 bg-white/10 rounded-xl" />
-                          </div>
-                          <div className="h-12 w-32 bg-blue-600/20 border border-blue-500/30 rounded-xl" />
-                        </div>
-
-                        <div className="grid grid-cols-3 gap-6 py-4">
-                          {[1, 2, 3].map(k => (
-                            <div key={k} className="p-6 rounded-2xl border border-white/5 bg-white/[0.02]">
-                              <div className="h-10 w-10 bg-white/5 rounded-lg mb-4" />
-                              <div className="h-3 w-20 bg-white/10 rounded-full" />
-                            </div>
-                          ))}
-                        </div>
-
-                        <div className="h-40 bg-white/[0.02] border border-white/5 rounded-2xl flex items-end px-6 pt-6 gap-3">
-                          {[40, 70, 45, 90, 60, 80, 50, 95].map((h, k) => (
-                            <div key={k} className="flex-1 bg-blue-600/20 rounded-t-lg border-t border-x border-blue-500/20 shadow-[0_0_20px_rgba(37,99,235,0.1)]" style={{ height: `${h}%` }} />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div className="min-h-screen bg-[#008080] font-['Courier_New'] flex flex-col pt-24 pb-12 px-4 md:px-8">
+      <Seo title="EcoSystem Products" description="Our suite of enterprise-grade platforms." />
+      
+      <div className="container mx-auto max-w-5xl">
+        <div className="win95-window w-full flex flex-col mb-8">
+          <div className="win95-header flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Globe className="w-4 h-4" />
+              <span>Products_Directory.exe</span>
             </div>
-          ))}
-        </div>
-      </section>
+            <div className="flex gap-1">
+              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold pb-1">_</button>
+              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">□</button>
+              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">X</button>
+            </div>
+          </div>
+          
+          <div className="p-4 md:p-8 bg-[#c0c0c0] text-black">
+             <div className="border-2 border-[#808080] border-r-white border-b-white p-6 bg-white mb-8">
+               <h1 className="text-4xl font-bold mb-4">Infrastructure for the Next Generation</h1>
+               <p className="font-bold text-lg">Integrated applications designed to scale. From AI-driven assessment to institutional-grade resource planning.</p>
+             </div>
 
-      {/* Enterprise CTA */}
-      <section className="py-40 border-t border-white/5 relative">
-        <div className="absolute inset-0 bg-blue-600/5 blur-[120px] rounded-full translate-y-20 pointer-events-none" />
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <h2 className="text-4xl md:text-6xl font-bold mb-10">Ready to transform?</h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Button asChild size="lg" className="h-16 px-10 bg-blue-600 text-white hover:bg-blue-700 rounded-2xl font-bold shadow-[0_0_30px_rgba(37,99,235,0.3)]">
-              <Link to="/contact">Request Executive Demo</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="h-16 px-10 glass border-white/10 text-white hover:bg-white/5 rounded-2xl font-bold">
-              <Link to="/technology">Technical Specifications</Link>
-            </Button>
+             <div className="space-y-8">
+               {products.map((p, i) => (
+                 <div key={p.title} className="border-2 border-[#808080] border-r-white border-b-white p-4 bg-[#c0c0c0]">
+                   <div className="flex items-center gap-4 border-b-2 border-[#808080] pb-2 mb-4">
+                     <p.icon className="h-8 w-8 text-[#000080]" />
+                     <h2 className="text-2xl font-bold text-[#000080]">{p.title}</h2>
+                     {p.featured && <span className="ml-auto bg-yellow-300 text-black px-2 font-bold border border-black text-xs">FEATURED</span>}
+                   </div>
+                   
+                   <p className="font-bold mb-4">{p.overview}</p>
+                   
+                   <div className="grid md:grid-cols-2 gap-4 mb-4">
+                     <div className="win95-input p-2 bg-white">
+                       <h3 className="font-bold underline mb-2">Features</h3>
+                       <ul className="list-disc list-inside text-sm font-bold">
+                         {p.features.map(f => <li key={f}>{f}</li>)}
+                       </ul>
+                     </div>
+                     <div className="win95-input p-2 bg-black text-[#00ff00]">
+                       <h3 className="font-bold underline mb-2 text-white">System Info</h3>
+                       <p className="text-sm font-bold mb-2">Arch: {p.architecture}</p>
+                       <p className="text-sm font-bold">Users: {p.users}</p>
+                     </div>
+                   </div>
+
+                   {/* @ts-ignore */}
+                   {p.link && (
+                     <Button asChild className="win95-btn h-8 rounded-none font-bold">
+                       <a href={p.link} target="_blank" rel="noopener noreferrer">Launch Application</a>
+                     </Button>
+                   )}
+                 </div>
+               ))}
+             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

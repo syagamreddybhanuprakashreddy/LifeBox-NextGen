@@ -11,109 +11,77 @@ const values = [
   { icon: Globe, title: "Global Mindset", desc: "We are building for the world, not just a local market." },
 ];
 
-const positions = [
-  { title: "Senior Backend Engineer", dept: "Engineering", loc: "Remote (India)", type: "Full-time" },
-  { title: "Product Designer", dept: "Design", loc: "Hyderabad / Remote", type: "Full-time" },
-  { title: "Enterprise Account Executive", dept: "Sales", loc: "Mumbai", type: "Full-time" },
-  { title: "DevOps Specialist", dept: "Infrastructure", loc: "Remote", type: "Contract" },
-];
+const positions: any[] = [];
 
 const Careers = () => {
   return (
-    <div className="bg-white text-gray-900 font-sans min-h-screen">
-      <Seo
-        title="Careers at LifeBox"
-        description="Join our world-class engineering team. We are building the operating system for modern institutions."
-      />
-
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 border-b border-gray-100 bg-gray-50/50">
-        <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
-          <p className="text-sm font-semibold text-blue-600 uppercase tracking-widest mb-4">We are hiring</p>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 mb-8">
-            Build the future of <br />  enterprise software.
-          </h1>
-          <p className="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            Join a team of builders, designers, and problem solvers obsessed with quality and scale.
-          </p>
-        </div>
-      </section>
-
-      {/* Values Grid */}
-      <section className="py-24">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="text-left mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our DNA</h2>
-            <p className="text-lg text-gray-500 max-w-2xl">
-              We are not a typical 9-to-5 company. We are a high-performance team on a mission.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((v) => (
-              <div key={v.title} className="p-8 border border-gray-100 rounded-2xl bg-white hover:border-gray-200 hover:shadow-sm transition-all">
-                <div className="h-12 w-12 bg-gray-50 rounded-xl flex items-center justify-center text-gray-900 mb-6">
-                  <v.icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-bold text-gray-900 mb-3">{v.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{v.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Visual Break */}
-      <section className="py-24 bg-gray-900 text-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-900/10 -skew-x-12 transform origin-top-right" />
-        <div className="container mx-auto px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-          <div className="max-w-xl">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Perks & Benefits</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {["Competitive Equity", "Remote-First Culture", "Premium Health Insurance", "Learning Budget", "Latest MacBook Pro", "Annual Retreats"].map(p => (
-                <div key={p} className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-blue-400" />
-                  <span className="text-gray-300 font-medium">{p}</span>
-                </div>
-              ))}
+    <div className="min-h-screen bg-[#008080] font-['Courier_New'] flex flex-col pt-24 pb-12 px-4 md:px-8">
+      <Seo title="Careers at LifeBox" description="Join our world-class engineering team." />
+      
+      <div className="container mx-auto max-w-4xl">
+        <div className="win95-window w-full flex flex-col mb-8">
+          <div className="win95-header flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              <span>Careers.exe</span>
+            </div>
+            <div className="flex gap-1">
+              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold pb-1">_</button>
+              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">□</button>
+              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">X</button>
             </div>
           </div>
-          <div className="h-64 mt-10 md:mt-0 aspect-square bg-gray-800 rounded-2xl border border-gray-700 flex items-center justify-center">
-            <span className="text-gray-600 font-mono text-xs p-8 text-center">
-                  // Image Placeholder: <br /> Team collaboration / Office vibes
-            </span>
-          </div>
-        </div>
-      </section>
+          
+          <div className="p-4 md:p-8 bg-[#c0c0c0] text-black">
+             <div className="border-2 border-[#808080] border-r-white border-b-white p-6 bg-white mb-8 text-center">
+               <h1 className="text-4xl font-bold mb-4">Join Our Team</h1>
+               <p className="font-bold text-lg mb-4">Build the future of enterprise software.</p>
+             </div>
 
-      {/* Open Positions List */}
-      <section className="py-24" id="openings">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="mb-12 flex justify-between items-end">
-            <h2 className="text-3xl font-bold text-gray-900">Open Roles</h2>
-            <Button variant="ghost" className="text-blue-600 hover:text-blue-700">View all on Lever <ArrowRight className="ml-2 h-4 w-4" /></Button>
-          </div>
-
-          <div className="space-y-4">
-            {positions.map((p, i) => (
-              <div key={i} className="group flex items-center justify-between p-6 border border-gray-100 rounded-xl hover:border-blue-200 hover:bg-blue-50/30 transition-all cursor-pointer">
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-blue-700 transition-colors">{p.title}</h3>
-                  <div className="flex gap-3 text-sm text-gray-500 font-medium">
-                    <span>{p.dept}</span>
-                    <span>•</span>
-                    <span>{p.loc}</span>
+             <h2 className="text-2xl font-bold mb-4 underline text-[#000080]">C:\Culture\</h2>
+             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {values.map((v) => (
+                  <div key={v.title} className="border-2 border-[#808080] border-r-white border-b-white p-2 bg-[#c0c0c0] flex flex-col items-center text-center">
+                    <v.icon className="h-6 w-6 mb-2 text-[#000080]" />
+                    <h3 className="font-bold text-sm underline mb-1">{v.title}</h3>
+                    <p className="text-xs font-bold leading-tight">{v.desc}</p>
                   </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <Badge variant="secondary" className="bg-gray-100 text-gray-600 font-normal group-hover:bg-white">{p.type}</Badge>
-                  <ArrowRight className="h-5 w-5 text-gray-300 group-hover:text-blue-600 transition-colors" />
-                </div>
-              </div>
-            ))}
+                ))}
+             </div>
+
+             <h2 className="text-2xl font-bold mb-4 underline text-[#000080]">C:\Jobs\Openings\</h2>
+             <div className="border-2 border-[#808080] border-r-white border-b-white p-4 bg-white">
+                {positions.length > 0 ? (
+                  <table className="w-full text-left border-collapse">
+                    <thead className="bg-[#c0c0c0] border-b-2 border-black">
+                      <tr>
+                        <th className="p-2 border-r-2 border-black">Title</th>
+                        <th className="p-2 border-r-2 border-black">Dept</th>
+                        <th className="p-2 border-r-2 border-black">Location</th>
+                        <th className="p-2">Type</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {positions.map((p, i) => (
+                        <tr key={i} className="hover:bg-[#000080] hover:text-white cursor-pointer group">
+                          <td className="p-2 border-r-2 border-transparent group-hover:border-[#c0c0c0] font-bold underline">{p.title}</td>
+                          <td className="p-2 border-r-2 border-transparent group-hover:border-[#c0c0c0]">{p.dept}</td>
+                          <td className="p-2 border-r-2 border-transparent group-hover:border-[#c0c0c0]">{p.loc}</td>
+                          <td className="p-2">{p.type}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <div className="win95-input p-4 bg-black text-[#00ff00] text-center font-bold">
+                    System Message: 0 positions found.<br/>
+                    Currently, there are no open roles. Please check back later.
+                  </div>
+                )}
+             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

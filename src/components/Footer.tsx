@@ -3,37 +3,40 @@ import { Twitter, Linkedin, Github, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-[#050505] text-white pt-32 pb-12 border-t border-white/[0.05] overflow-hidden">
+    <footer className="bg-[#c0c0c0] text-black pt-8 pb-4 win95-window mt-12 mx-4 mb-4">
+      <div className="win95-header mb-8 mx-4">
+        <span>Footer_Links.exe</span>
+      </div>
 
-      {/* Footer Glow */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-600/5 blur-[100px] rounded-full pointer-events-none" />
-
-      <div className="container mx-auto px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12 mb-24">
+      <div className="container mx-auto px-4 relative z-10 font-['Courier_New']">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12">
 
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-8 group w-fit">
-              <div className="bg-white/5 p-1 rounded-full border border-white/10 group-hover:border-blue-500/50 transition-colors">
-                <img
-                  src="https://i.ibb.co/k6P7hnvb/Whats-App-Image-2026-01-09-at-13-40-57.jpg"
-                  alt="LifeBox NextGen"
-                  className="h-8 w-8 object-cover rounded-full"
-                />
-              </div>
-              <span className="text-xl font-bold tracking-tight text-gray-200 group-hover:text-white transition-colors">
-                LifeBox NextGen
+            <Link to="/" className="flex items-center gap-2 mb-4 w-fit">
+              <img
+                src="https://i.ibb.co/k6P7hnvb/Whats-App-Image-2026-01-09-at-13-40-57.jpg"
+                alt="LifeBox NextGen"
+                className="h-8 w-8 object-cover border-2 border-[#808080]"
+              />
+              <span className="text-xl font-bold tracking-tight text-black">
+                LifeBox_NextGen
               </span>
             </Link>
-            <p className="text-gray-500 leading-relaxed mb-8 max-w-sm text-sm">
-              Architecting the resilient digital backbone for modern institutions.
+            <p className="text-black font-bold mb-6 text-sm">
+              Architecting the resilient digital backbone for modern institutions.<br/>
               SOC-2 Type II Compliant.
             </p>
-            <div className="flex gap-4">
-              {[Twitter, Linkedin, Github, Mail].map((Icon, i) => (
-                <div key={i} className="h-10 w-10 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer">
-                  <Icon className="h-4 w-4" />
-                </div>
+            <div className="flex gap-2">
+              {[
+                { icon: Twitter, href: "https://twitter.com" },
+                { icon: Linkedin, href: "https://linkedin.com" },
+                { icon: Github, href: "https://github.com" },
+                { icon: Mail, href: "mailto:contact@lifebox.com" }
+              ].map((item, i) => (
+                <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" className="h-8 w-8 win95-btn flex items-center justify-center cursor-pointer text-black decoration-none">
+                  <item.icon className="h-4 w-4" />
+                </a>
               ))}
             </div>
           </div>
@@ -54,28 +57,34 @@ const Footer = () => {
               links: [
                 { l: "Leadership", h: "/about" },
                 { l: "Careers", h: "/careers" },
-                { l: "Security", h: "/about" },
+                { l: "Security", h: "/technology" },
                 { l: "Contact", h: "/contact" }
               ]
             },
             {
               title: "Resources",
               links: [
-                { l: "Documentation", h: "#" },
-                { l: "API Status", h: "#" },
+                { l: "Documentation", h: "/technology" },
+                { l: "API Status", h: "https://status.lifebox.com" },
                 { l: "Case Studies", h: "/case-studies" },
-                { l: "Privacy Policy", h: "#" }
+                { l: "Privacy Policy", h: "/privacy" }
               ]
             }
           ].map((col, i) => (
             <div key={i} className="col-span-1">
-              <h4 className="font-bold text-xs uppercase tracking-[0.2em] text-gray-600 mb-8">{col.title}</h4>
-              <ul className="space-y-4">
+              <h4 className="font-bold text-sm uppercase text-[#000080] mb-4 underline">{col.title}</h4>
+              <ul className="space-y-2">
                 {col.links.map((link) => (
                   <li key={link.l}>
-                    <Link to={link.h} className="text-sm text-gray-400 hover:text-blue-400 transition-colors font-medium">
-                      {link.l}
-                    </Link>
+                    {link.h.startsWith('http') ? (
+                      <a href={link.h} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-[#0000ee] hover:text-[#ff0000] underline">
+                        {link.l}
+                      </a>
+                    ) : (
+                      <Link to={link.h} className="text-sm font-bold text-[#0000ee] hover:text-[#ff0000] underline">
+                        {link.l}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -83,13 +92,13 @@ const Footer = () => {
           ))}
         </div>
 
-        <div className="pt-12 border-t border-white/[0.05] flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-xs text-gray-600 font-mono">
+        <div className="pt-4 border-t-2 border-[#808080] border-b-2 border-b-white flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm font-bold">
             © {new Date().getFullYear()} LIFEBOX NEXTGEN PVT. LTD. // EST. 2024
           </p>
-          <div className="flex gap-8">
-            <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-xs text-gray-500 font-mono uppercase">Systems Normal</span>
+          <div className="flex items-center gap-2 win95-input px-2 py-1 bg-black text-[#00ff00]">
+            <div className="h-2 w-2 rounded-none bg-[#00ff00] animate-pulse" />
+            <span className="text-sm font-bold uppercase">Systems Normal</span>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, MapPin, ArrowRight } from "lucide-react";
+import { Mail, MapPin, ArrowRight, Sparkles } from "lucide-react";
 import Seo from "@/components/Seo";
 
 const formSchema = z.object({
@@ -54,144 +54,144 @@ const Contact = () => {
   }
 
   return (
-    <div className="bg-black text-white font-sans min-h-screen">
+    <div className="min-h-screen p-4 md:p-8 flex items-center justify-center">
       <Seo
-        title="Contact Sales"
+        title="Contact Sales - LifeBox 95"
         description="Get in touch with LifeBox NextGen enterprise team."
       />
 
-      <section className="pt-32 pb-20 border-b border-white/10 bg-black">
-        <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center">
-          <p className="text-sm font-semibold text-blue-500 uppercase tracking-widest mb-4">Contact us</p>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
-            Partner with LifeBox.
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Ready to upgrade your infrastructure? Our engineering team is here to help you architect the perfect solution.
-          </p>
+      <div className="win95-window w-full max-w-4xl flex flex-col">
+        {/* Title Bar */}
+        <div className="win95-header flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Mail className="w-4 h-4" />
+            <span>Contact_LifeBox.exe</span>
+          </div>
+          <div className="flex gap-1">
+            <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold pb-1">_</button>
+            <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">□</button>
+            <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">X</button>
+          </div>
         </div>
-      </section>
 
-      <section className="py-24">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-
-            {/* Contact Details */}
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-6">Get in touch</h2>
-              <p className="text-gray-400 mb-12 leading-relaxed">
-                Whether you have a technical question or need a custom enterprise quote, our team is ready to assist.
-              </p>
-
-              <div className="space-y-8">
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-md bg-white/10 flex items-center justify-center text-white flex-shrink-0">
-                    <Mail className="h-5 w-5" />
-                  </div>
+        {/* Content */}
+        <div className="p-4 grid lg:grid-cols-2 gap-6 text-black bg-[#c0c0c0]">
+          
+          {/* Info Side */}
+          <div className="space-y-4">
+            <div className="border-2 border-[#808080] border-r-white border-b-white p-4">
+              <h1 className="text-2xl font-bold mb-4 font-['Courier_New'] text-[#000080]">
+                Partner with LifeBox
+              </h1>
+              <div className="w-full overflow-hidden bg-black text-[#00ff00] font-['Courier_New'] p-1 mb-4 border-2 border-[#808080] border-r-white border-b-white">
+                <span className="animate-marquee block">Ready to upgrade your infrastructure?</span>
+              </div>
+              
+              <div className="space-y-4 font-['Courier_New'] font-bold">
+                <div className="flex items-start gap-2">
+                  <Mail className="h-5 w-5 text-[#000080]" />
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Email Us</h3>
-                    <p className="text-sm text-gray-400 mb-1">For all inquiries</p>
-                    <a href="mailto:careers@lifeboxnetgen.co.site" className="text-blue-500 font-medium hover:text-blue-400">careers@lifeboxnetgen.co.site</a>
+                    <div className="uppercase">Email Us</div>
+                    <a href="mailto:careers@lifeboxnetgen.co.site" className="text-[#0000ee] hover:text-[#551a8b] underline">careers@lifeboxnetgen.co.site</a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-md bg-white/10 flex items-center justify-center text-white flex-shrink-0">
-                    <MapPin className="h-5 w-5" />
-                  </div>
+                <div className="flex items-start gap-2">
+                  <MapPin className="h-5 w-5 text-[#000080]" />
                   <div>
-                    <h3 className="font-semibold text-white mb-1">HQ</h3>
-                    <p className="text-sm text-gray-400">
-                      <a
-                        href="https://maps.app.goo.gl/asDaoeCWMkFf2Sjo9"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-blue-500 transition-colors"
-                      >
-                        LifeBox NextGen Pvt. Ltd.<br />
-                        Narasaraopet, Andhra Pradesh 522615
-                      </a>
-                    </p>
+                    <div className="uppercase">HQ Location</div>
+                    <a href="https://maps.app.goo.gl/asDaoeCWMkFf2Sjo9" target="_blank" rel="noopener noreferrer" className="text-[#0000ee] hover:text-[#551a8b] underline">
+                      LifeBox NextGen Pvt. Ltd.<br/>
+                      Narasaraopet, AP 522615
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Contact Form */}
-            <div className="bg-white/5 rounded-xl p-8 lg:p-10 border border-white/10">
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-gray-300">Full Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Jane Doe" {...field} className="bg-black/20 border-white/10 text-white placeholder:text-gray-600 focus:border-blue-500 focus:ring-blue-500/20" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="company"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-gray-300">Company</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Acme Corp" {...field} className="bg-black/20 border-white/10 text-white placeholder:text-gray-600 focus:border-blue-500 focus:ring-blue-500/20" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">Work Email</FormLabel>
-                        <FormControl>
-                          <Input placeholder="jane@acme.com" {...field} className="bg-black/20 border-white/10 text-white placeholder:text-gray-600 focus:border-blue-500 focus:ring-blue-500/20" />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">How can we help?</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Tell us about your infrastructure needs..."
-                            className="resize-none min-h-[120px] bg-black/20 border-white/10 text-white placeholder:text-gray-600 focus:border-blue-500 focus:ring-blue-500/20"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <Button type="submit" className="w-full h-12 bg-white text-black hover:bg-gray-200 font-medium text-base rounded-md">
-                    Send Request <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </form>
-              </Form>
+            
+            <div className="flex justify-center border-2 border-[#808080] border-r-white border-b-white p-2 bg-white">
+               <img src="https://media.giphy.com/media/26FPCXdkvDbKBbgOI/giphy.gif" alt="Under Construction" className="h-16" />
             </div>
-
           </div>
+
+          {/* Form Side */}
+          <div className="border-2 border-[#808080] border-r-white border-b-white p-4">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-bold text-black font-['Courier_New']">Full Name:</FormLabel>
+                        <FormControl>
+                          <Input {...field} className="win95-input h-8 rounded-none border-0" />
+                        </FormControl>
+                        <FormMessage className="text-[#ff0000]" />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="company"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-bold text-black font-['Courier_New']">Company:</FormLabel>
+                        <FormControl>
+                          <Input {...field} className="win95-input h-8 rounded-none border-0" />
+                        </FormControl>
+                        <FormMessage className="text-[#ff0000]" />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold text-black font-['Courier_New']">Work Email:</FormLabel>
+                      <FormControl>
+                        <Input {...field} className="win95-input h-8 rounded-none border-0" />
+                      </FormControl>
+                      <FormMessage className="text-[#ff0000]" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold text-black font-['Courier_New']">Message:</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          className="win95-input min-h-[100px] resize-none rounded-none border-0"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-[#ff0000]" />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="pt-4 flex justify-end gap-2">
+                  <Button type="button" onClick={() => form.reset()} className="win95-btn h-8 px-4 rounded-none font-bold">
+                    Cancel
+                  </Button>
+                  <Button type="submit" className="win95-btn h-8 px-4 rounded-none font-bold">
+                    OK <ArrowRight className="ml-2 w-3 h-3 inline" />
+                  </Button>
+                </div>
+              </form>
+            </Form>
+          </div>
+
         </div>
-      </section>
+      </div>
     </div>
   );
 };

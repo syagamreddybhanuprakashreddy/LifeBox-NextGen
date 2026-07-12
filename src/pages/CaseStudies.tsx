@@ -46,89 +46,67 @@ const studies = [
 
 const CaseStudies = () => {
   return (
-    // Explicitly set bg-black and text-white here to override any conflicting styles
-    <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden selection:bg-blue-500/30">
-      <Seo
-        title="Customer Stories"
-        description="See how leading institutions use LifeBox NextGen to transform their operations."
-      />
+    <div className="min-h-screen bg-[#008080] font-['Courier_New'] flex flex-col pt-24 pb-12 px-4 md:px-8">
+      <Seo title="Customer Stories" description="See how leading institutions use LifeBox NextGen to transform their operations." />
+      
+      <div className="container mx-auto max-w-4xl">
+        <div className="win95-window w-full flex flex-col mb-8">
+          <div className="win95-header flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              <span>Customer_Stories.mdb</span>
+            </div>
+            <div className="flex gap-1">
+              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold pb-1">_</button>
+              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">□</button>
+              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">X</button>
+            </div>
+          </div>
+          
+          <div className="p-4 md:p-8 bg-[#c0c0c0] text-black">
+             <div className="border-2 border-[#808080] border-r-white border-b-white p-6 bg-white mb-8 text-center">
+               <h1 className="text-4xl font-bold mb-4">Customer Stories</h1>
+               <p className="font-bold text-lg mb-4">Real problems. Measurable outcomes.</p>
+             </div>
 
-      {/* --- HERO SECTION --- */}
-      <section className="relative pt-32 pb-20 border-b border-white/5 bg-black">
-        <div className="absolute inset-0 bg-blue-900/10 blur-[100px] pointer-events-none" />
-        <div className="container mx-auto px-6 lg:px-8 max-w-4xl text-center relative z-10">
-          <p className="text-xs font-bold text-blue-500 uppercase tracking-[0.3em] mb-4">Case Studies</p>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6">
-            Real problems. <br /> <span className="text-gray-500">Measurable outcomes.</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            We measure our success by the impact we create for our clients. Here are some of their stories.
-          </p>
-        </div>
-      </section>
-
-      {/* Case Studies Grid */}
-      <section className="py-24 bg-black">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8">
-            {studies.map((s, i) => (
-              <div key={i} className="group p-8 border border-white/10 rounded-[2rem] bg-[#0A0A0A] hover:border-white/20 hover:bg-[#0F0F0F] hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between h-full relative overflow-hidden">
-
-                {/* Glow Effect */}
-                <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] opacity-0 group-hover:opacity-20 transition-opacity pointer-events-none ${s.color.split(' ')[2].replace('/10', '/30')}`} />
-
-                <div className="relative z-10">
-                  <div className="flex justify-between items-start mb-8">
-                    <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border ${s.color}`}>
-                      {s.category}
-                    </span>
-                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">{s.client}</span>
+             <div className="grid md:grid-cols-2 gap-6">
+                {studies.map((s, i) => (
+                  <div key={i} className="border-2 border-[#808080] border-r-white border-b-white p-4 bg-[#c0c0c0] flex flex-col justify-between">
+                    <div>
+                      <div className="flex justify-between items-start mb-4 border-b border-[#808080] pb-2">
+                        <span className="font-bold underline text-[#000080]">{s.category}</span>
+                        <span className="text-sm font-bold bg-white px-1 border border-[#808080]">{s.client}</span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-2">{s.title}</h3>
+                      <p className="font-bold text-sm mb-4">{s.desc}</p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {s.tags.map(t => (
+                          <span key={t} className="text-[10px] font-bold bg-white border border-[#808080] px-1 uppercase">{t}</span>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="win95-input p-2 bg-black text-[#00ff00] flex justify-between items-center mt-4">
+                      <div>
+                        <p className="text-[10px] uppercase font-bold text-white underline">Key Result</p>
+                        <p className="font-bold">{s.metric}</p>
+                      </div>
+                      <ArrowRight className="h-4 w-4" />
+                    </div>
                   </div>
-
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
-                    {s.title}
-                  </h3>
-                  <p className="text-lg text-gray-400 mb-8 leading-relaxed font-light">
-                    {s.desc}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {s.tags.map(t => (
-                      <span key={t} className="text-[10px] font-bold text-gray-500 bg-white/5 px-2 py-1 rounded border border-white/5 uppercase tracking-wide">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between relative z-10">
-                  <div>
-                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-1">Key Result</p>
-                    <p className="text-xl font-bold text-white font-mono">{s.metric}</p>
-                  </div>
-                  <div className="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-white group-hover:text-black transition-all">
-                    <ArrowRight className="h-4 w-4" />
-                  </div>
-                </div>
-              </div>
-            ))}
+                ))}
+             </div>
+             
+             <div className="mt-8 border-2 border-[#808080] border-r-white border-b-white p-6 bg-white text-center">
+               <h2 className="text-2xl font-bold mb-4">Start your transformation</h2>
+               <Button asChild className="win95-btn h-10 px-8 rounded-none font-bold text-black bg-[#c0c0c0] hover:bg-[#c0c0c0]">
+                 <Link to="/contact">Book a Consultation</Link>
+               </Button>
+             </div>
           </div>
         </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-32 bg-black text-white text-center border-t border-white/5 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/5 blur-[100px] rounded-full pointer-events-none" />
-        <div className="relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">Start your transformation</h2>
-          <p className="text-gray-400 mb-10 max-w-lg mx-auto text-lg">
-            Join the forward-thinking organizations building their future with LifeBox NextGen.
-          </p>
-          <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-8 h-12 rounded-full font-bold shadow-[0_0_20px_rgba(255,255,255,0.1)]" asChild>
-            <Link to="/contact">Book a Consultation</Link>
-          </Button>
-        </div>
-      </section>
+      </div>
     </div>
   );
 };
