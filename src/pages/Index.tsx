@@ -36,7 +36,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#008080] font-['Courier_New'] flex flex-col pt-24 pb-12 px-4 md:px-8">
+    <div className="min-h-screen bg-[#008080] font-['Courier_New'] flex flex-col pt-24 pb-12 px-2 md:px-8">
       <Seo
         title="LifeBox NextGen - Enterprise Infrastructure"
         description="LifeBox NextGen - The intelligent digital backbone for modern institutions."
@@ -46,20 +46,20 @@ const Index = () => {
         {/* Main Desktop Window */}
         <div className="win95-window w-full flex flex-col mb-8">
           <div className="win95-header flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Terminal className="w-4 h-4" />
-              <span>LifeBox_OS_v1.exe</span>
+            <div className="flex items-center gap-2 min-w-0">
+              <Terminal className="w-4 h-4 shrink-0" />
+              <span className="truncate text-sm md:text-base">LifeBox_OS_v1.exe</span>
             </div>
-            <div className="flex gap-1">
+            <div className="flex gap-1 shrink-0">
               <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold pb-1">_</button>
               <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">□</button>
               <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">X</button>
             </div>
           </div>
 
-          <div className="p-4 md:p-8 bg-[#c0c0c0] text-black">
-            <div className="border-2 border-[#808080] border-r-white border-b-white p-6 bg-white flex flex-col items-center text-center mb-8">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 font-['Courier_New']">
+          <div className="p-2 md:p-8 bg-[#c0c0c0] text-black">
+            <div className="border-2 border-[#808080] border-r-white border-b-white p-3 md:p-6 bg-white flex flex-col items-center text-center mb-8">
+              <h1 className="text-3xl md:text-6xl font-bold mb-4 font-['Courier_New'] leading-tight">
                 Welcome to LifeBox NextGen
               </h1>
               <div className="w-full max-w-md overflow-hidden bg-black text-[#00ff00] p-2 border-2 border-[#808080] border-r-white border-b-white mb-6">
