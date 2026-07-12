@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, BarChart3, Users, Building2, ShieldCheck } from "lucide-react";
+import { ArrowRight, Users, Building2, ShieldCheck, TrendingUp } from "lucide-react";
 import Seo from "@/components/Seo";
 import { Link } from "react-router-dom";
 
@@ -13,7 +12,8 @@ const studies = [
     title: "Digital Transformation at Scale",
     desc: "How a 5-campus university unified admissions, finance, and academics into a single ERP system.",
     tags: ["ERP Migration", "Cloud Deployment"],
-    color: "text-blue-400 border-blue-500/30 bg-blue-500/10"
+    icon: Users,
+    color: "cyan"
   },
   {
     category: "Recruitment",
@@ -22,7 +22,8 @@ const studies = [
     title: "Automating Technical Interviews",
     desc: "Scaling mock interviews for 2,000+ students using Gnan AI's automated assessment engine.",
     tags: ["AI Implementation", "Student Success"],
-    color: "text-purple-400 border-purple-500/30 bg-purple-500/10"
+    icon: TrendingUp,
+    color: "magenta"
   },
   {
     category: "Enterprise",
@@ -31,7 +32,8 @@ const studies = [
     title: "CRM for High-Velocity Sales",
     desc: "Replacing spreadsheets with an intelligent CRM to track leads and automate follow-ups.",
     tags: ["Custom CRM", "Workflow Automation"],
-    color: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10"
+    icon: Building2,
+    color: "cyan"
   },
   {
     category: "Assessment",
@@ -40,71 +42,78 @@ const studies = [
     title: "Zero-Downtime Examinations",
     desc: "Conducting secure, proctored online exams for thousands of candidates simultaneously.",
     tags: ["High Availability", "Security Audit"],
-    color: "text-orange-400 border-orange-500/30 bg-orange-500/10"
+    icon: ShieldCheck,
+    color: "magenta"
   }
 ];
 
 const CaseStudies = () => {
   return (
-    <div className="min-h-screen bg-[#008080] font-['Courier_New'] flex flex-col pt-24 pb-12 px-4 md:px-8">
+    <div className="min-h-screen pt-24 pb-12 flex flex-col items-center">
       <Seo title="Customer Stories" description="See how leading institutions use LifeBox NextGen to transform their operations." />
       
-      <div className="container mx-auto max-w-4xl">
-        <div className="win95-window w-full flex flex-col mb-8">
-          <div className="win95-header flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Users className="w-4 h-4" />
-              <span>Customer_Stories.mdb</span>
-            </div>
-            <div className="flex gap-1">
-              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold pb-1">_</button>
-              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">□</button>
-              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">X</button>
-            </div>
+      <div className="container mx-auto max-w-7xl px-6">
+         <div className="text-center mb-16 mt-8">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-cyan-400/30 bg-cyan-400/5 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-6">
+            <span className="w-2 h-2 bg-cyan-400 shadow-[0_0_8px_#00f0ff]"></span>
+            Customer Success
           </div>
-          
-          <div className="p-4 md:p-8 bg-[#c0c0c0] text-black">
-             <div className="border-2 border-[#808080] border-r-white border-b-white p-6 bg-white mb-8 text-center">
-               <h1 className="text-4xl font-bold mb-4">Customer Stories</h1>
-               <p className="font-bold text-lg mb-4">Real problems. Measurable outcomes.</p>
-             </div>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight uppercase">
+            Real Problems. <br/><span className="neon-text-magenta">Measurable Outcomes.</span>
+          </h1>
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto font-['Inter']">
+            See how leading institutions use LifeBox NextGen to transform their operations and accelerate growth.
+          </p>
+        </div>
 
-             <div className="grid md:grid-cols-2 gap-6">
-                {studies.map((s, i) => (
-                  <div key={i} className="border-2 border-[#808080] border-r-white border-b-white p-4 bg-[#c0c0c0] flex flex-col justify-between">
-                    <div>
-                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 border-b border-[#808080] pb-2 gap-2">
-                        <span className="font-bold underline text-[#000080]">{s.category}</span>
-                        <span className="text-sm font-bold bg-white px-1 border border-[#808080] self-start">{s.client}</span>
-                      </div>
-                      <h3 className="text-xl font-bold mb-2">{s.title}</h3>
-                      <p className="font-bold text-sm mb-4">{s.desc}</p>
-                      
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {s.tags.map(t => (
-                          <span key={t} className="text-[10px] font-bold bg-white border border-[#808080] px-1 uppercase">{t}</span>
-                        ))}
-                      </div>
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          {studies.map((s, i) => (
+            <div key={i} className="tech-card tech-border-glow p-6 sm:p-8 flex flex-col justify-between group overflow-hidden relative bg-black">
+              
+              <div>
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-6 border-b border-white/10 pb-4 gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 border flex items-center justify-center shrink-0 ${s.color === 'cyan' ? 'border-cyan-400 text-cyan-400 shadow-[0_0_10px_rgba(0,240,255,0.2)]' : 'border-[#ff00ff] text-[#ff00ff] shadow-[0_0_10px_rgba(255,0,255,0.2)]'}`}>
+                      <s.icon className="w-5 h-5" />
                     </div>
-                    
-                    <div className="win95-input p-2 bg-black text-[#00ff00] flex justify-between items-center mt-4">
-                      <div>
-                        <p className="text-[10px] uppercase font-bold text-white underline">Key Result</p>
-                        <p className="font-bold">{s.metric}</p>
-                      </div>
-                      <ArrowRight className="h-4 w-4" />
-                    </div>
+                    <span className="font-bold text-white uppercase tracking-wider font-['Space_Grotesk']">{s.category}</span>
                   </div>
-                ))}
-             </div>
-             
-             <div className="mt-8 border-2 border-[#808080] border-r-white border-b-white p-6 bg-white text-center">
-               <h2 className="text-2xl font-bold mb-4">Start your transformation</h2>
-               <Button asChild className="win95-btn h-10 px-8 rounded-none font-bold text-black bg-[#c0c0c0] hover:bg-[#c0c0c0]">
-                 <Link to="/contact">Book a Consultation</Link>
-               </Button>
-             </div>
-          </div>
+                  <Badge variant="outline" className="bg-white/5 text-white border-white/20 self-start font-['Space_Grotesk'] rounded-none uppercase text-[10px] tracking-wider">{s.client}</Badge>
+                </div>
+                
+                <h3 className={`text-2xl font-bold mb-4 font-['Space_Grotesk'] uppercase transition-colors ${s.color === 'cyan' ? 'group-hover:text-cyan-400' : 'group-hover:text-[#ff00ff]'} text-white`}>{s.title}</h3>
+                <p className="text-slate-400 mb-6 text-base font-['Inter']">{s.desc}</p>
+                
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {s.tags.map(t => (
+                    <Badge key={t} variant="secondary" className="bg-transparent border border-white/10 text-slate-400 font-normal font-['Space_Grotesk'] rounded-none uppercase text-[10px] tracking-wider">
+                      {t}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="p-4 bg-white/5 border border-white/10 flex justify-between items-center transition-colors">
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-slate-500 mb-1 font-['Space_Grotesk'] font-bold">Key Result</p>
+                  <p className={`font-bold text-xl uppercase font-['Space_Grotesk'] ${s.color === 'cyan' ? 'text-cyan-400' : 'text-[#ff00ff]'}`}>{s.metric}</p>
+                </div>
+                <div className="w-10 h-10 border border-white/20 flex items-center justify-center text-white group-hover:border-cyan-400 group-hover:text-cyan-400 transition-all bg-black">
+                  <ArrowRight className="h-5 w-5" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="border border-[#ff00ff]/30 bg-[#ff00ff]/5 p-12 md:p-16 text-center relative overflow-hidden flex flex-col items-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white relative z-10 uppercase tracking-wide font-['Space_Grotesk']">Start your <span className="neon-text-magenta">transformation</span></h2>
+          <p className="text-slate-400 text-lg mb-8 max-w-xl relative z-10 font-['Inter']">
+            Ready to achieve similar results? Our enterprise architects are ready to design your custom AI solution.
+          </p>
+          <Button asChild className="btn-tech h-14 px-10 rounded-none text-base">
+            <Link to="/contact">Book a Consultation</Link>
+          </Button>
         </div>
       </div>
     </div>

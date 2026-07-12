@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
-  GraduationCap, Brain, Globe, Building2, Users,
-  CheckCircle, BarChart3, Shield, Cpu, FileText, Code, UserCheck, Target, ArrowRight
+  GraduationCap, Brain, Globe, Building2, Users, ArrowRight
 } from "lucide-react";
 import Seo from "@/components/Seo";
 
@@ -24,7 +22,7 @@ const products = [
     users: "Universities, Training Institutes, Students",
     benefits: ["Standardized assessment", "Fraud-proof certification", "Data-driven student insights"],
     featured: true,
-    color: "blue"
+    color: "cyan"
   },
   {
     icon: Brain,
@@ -41,7 +39,7 @@ const products = [
     users: "HR Teams, Tech Recruiters, Enterprises",
     benefits: ["Eliminate bias", "Scale hiring instantly", "Deep technical evaluation"],
     featured: true,
-    color: "cyan"
+    color: "magenta"
   },
   {
     icon: Globe,
@@ -59,7 +57,7 @@ const products = [
     users: "Large Enterprises, Campus Networks",
     benefits: ["Seamless user experience", "Simplified IT management", "Enhanced security"],
     featured: false,
-    color: "emerald"
+    color: "cyan"
   },
   {
     icon: Building2,
@@ -76,7 +74,7 @@ const products = [
     users: "Universities, Colleges, Schools",
     benefits: ["Operational efficiency", "Real-time reporting", "Reduced admin overhead"],
     featured: false,
-    color: "indigo"
+    color: "magenta"
   },
   {
     icon: Users,
@@ -93,70 +91,91 @@ const products = [
     users: "Sales Teams, Marketing Agencies",
     benefits: ["Higher conversion rates", "Better customer retention", "Data-driven sales strategy"],
     featured: false,
-    color: "purple"
+    color: "cyan"
   },
 ];
 
 const Products = () => {
   return (
-    <div className="min-h-screen bg-[#008080] font-['Courier_New'] flex flex-col pt-24 pb-12 px-4 md:px-8">
-      <Seo title="EcoSystem Products" description="Our suite of enterprise-grade platforms." />
+    <div className="min-h-screen pt-24 pb-12 flex flex-col items-center">
+      <Seo title="EcoSystem Products" description="Our suite of enterprise-grade AI platforms." />
       
-      <div className="container mx-auto max-w-5xl">
-        <div className="win95-window w-full flex flex-col mb-8">
-          <div className="win95-header flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Globe className="w-4 h-4" />
-              <span>Products_Directory.exe</span>
-            </div>
-            <div className="flex gap-1">
-              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold pb-1">_</button>
-              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">□</button>
-              <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">X</button>
-            </div>
+      <div className="container mx-auto max-w-5xl px-6">
+        <div className="text-center mb-16 mt-8 relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-cyan-400/30 bg-cyan-400/5 text-cyan-400 text-xs font-bold uppercase tracking-widest mb-6">
+            <span className="w-2 h-2 bg-cyan-400 shadow-[0_0_8px_#00f0ff]"></span>
+            Product Architecture
           </div>
-          
-          <div className="p-4 md:p-8 bg-[#c0c0c0] text-black">
-             <div className="border-2 border-[#808080] border-r-white border-b-white p-6 bg-white mb-8">
-               <h1 className="text-4xl font-bold mb-4">Infrastructure for the Next Generation</h1>
-               <p className="font-bold text-lg">Integrated applications designed to scale. From AI-driven assessment to institutional-grade resource planning.</p>
-             </div>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight uppercase">
+            Ecosystem <span className="neon-text-magenta">Products</span>
+          </h1>
+          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-['Inter']">
+            Integrated applications designed to scale. From AI-driven assessment to institutional-grade resource planning.
+          </p>
+        </div>
 
-             <div className="space-y-8">
-               {products.map((p, i) => (
-                 <div key={p.title} className="border-2 border-[#808080] border-r-white border-b-white p-4 bg-[#c0c0c0]">
-                   <div className="flex items-center gap-4 border-b-2 border-[#808080] pb-2 mb-4">
-                     <p.icon className="h-8 w-8 text-[#000080]" />
-                     <h2 className="text-2xl font-bold text-[#000080]">{p.title}</h2>
-                     {p.featured && <span className="ml-auto bg-yellow-300 text-black px-2 font-bold border border-black text-xs">FEATURED</span>}
-                   </div>
-                   
-                   <p className="font-bold mb-4">{p.overview}</p>
-                   
-                   <div className="grid md:grid-cols-2 gap-4 mb-4">
-                     <div className="win95-input p-2 bg-white">
-                       <h3 className="font-bold underline mb-2">Features</h3>
-                       <ul className="list-disc list-inside text-sm font-bold">
-                         {p.features.map(f => <li key={f}>{f}</li>)}
-                       </ul>
-                     </div>
-                     <div className="win95-input p-2 bg-black text-[#00ff00]">
-                       <h3 className="font-bold underline mb-2 text-white">System Info</h3>
-                       <p className="text-sm font-bold mb-2">Arch: {p.architecture}</p>
-                       <p className="text-sm font-bold">Users: {p.users}</p>
-                     </div>
-                   </div>
+        <div className="space-y-8 mb-16">
+          {products.map((p) => (
+            <div key={p.title} className="tech-card tech-border-glow p-8 bg-black">
+              <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-white/10 pb-6 mb-6 gap-4">
+                <div className="flex items-center gap-4">
+                  <div className={`w-14 h-14 border flex items-center justify-center shrink-0 ${p.color === 'cyan' ? 'border-cyan-400 text-cyan-400 shadow-[0_0_10px_rgba(0,240,255,0.2)]' : 'border-[#ff00ff] text-[#ff00ff] shadow-[0_0_10px_rgba(255,0,255,0.2)]'}`}>
+                    <p.icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h2 className={`text-2xl font-bold uppercase font-['Space_Grotesk'] tracking-wide ${p.color === 'cyan' ? 'text-white' : 'text-white'}`}>{p.title}</h2>
+                    <p className={`text-sm uppercase tracking-widest font-['Space_Grotesk'] font-bold ${p.color === 'cyan' ? 'text-cyan-400' : 'text-[#ff00ff]'}`}>{p.tagline}</p>
+                  </div>
+                </div>
+                {p.featured && (
+                  <Badge variant="outline" className="border-cyan-400 text-cyan-400 bg-cyan-400/10 font-['Space_Grotesk'] rounded-none uppercase text-xs tracking-wider shrink-0 self-start md:self-center shadow-[0_0_10px_rgba(0,240,255,0.2)]">
+                    CORE MODULE
+                  </Badge>
+                )}
+              </div>
+              
+              <p className="text-slate-400 mb-8 font-['Inter'] leading-relaxed text-lg">{p.overview}</p>
+              
+              <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div>
+                  <h3 className="font-['Space_Grotesk'] font-bold uppercase tracking-wider text-white mb-4 text-sm flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-white"></span> Features
+                  </h3>
+                  <ul className="space-y-3 font-['Inter']">
+                    {p.features.map(f => (
+                      <li key={f} className="text-slate-400 flex items-start gap-2">
+                        <span className="text-cyan-400 mt-1">▹</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-white/5 border border-white/10 p-6">
+                  <h3 className="font-['Space_Grotesk'] font-bold uppercase tracking-wider text-white mb-4 text-sm flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-[#ff00ff]"></span> System Specs
+                  </h3>
+                  <div className="space-y-4 font-['Inter']">
+                    <div>
+                      <p className="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Architecture</p>
+                      <p className="text-slate-300 font-mono text-sm">{p.architecture}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Target End-Users</p>
+                      <p className="text-slate-300 text-sm">{p.users}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-                   {/* @ts-ignore */}
-                   {p.link && (
-                     <Button asChild className="win95-btn h-8 rounded-none font-bold">
-                       <a href={p.link} target="_blank" rel="noopener noreferrer">Launch Application</a>
-                     </Button>
-                   )}
-                 </div>
-               ))}
-             </div>
-          </div>
+              {p.link && (
+                <Button asChild className="btn-tech h-12 px-8 text-sm">
+                  <a href={p.link} target="_blank" rel="noopener noreferrer">
+                    Initialize Application <ArrowRight className="ml-2 w-4 h-4 inline" />
+                  </a>
+                </Button>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </div>

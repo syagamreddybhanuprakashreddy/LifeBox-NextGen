@@ -6,7 +6,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, MapPin, ArrowRight, Sparkles } from "lucide-react";
+import { Mail, MapPin, ArrowRight, Terminal } from "lucide-react";
 import Seo from "@/components/Seo";
 
 const formSchema = z.object({
@@ -54,81 +54,78 @@ const Contact = () => {
   }
 
   return (
-    <div className="min-h-screen p-4 md:p-8 flex items-center justify-center">
+    <div className="min-h-screen pt-24 pb-12 flex flex-col items-center justify-center relative overflow-hidden">
       <Seo
-        title="Contact Sales - LifeBox 95"
-        description="Get in touch with LifeBox NextGen enterprise team."
+        title="Contact Sales - LifeBox NextGen"
+        description="Get in touch with LifeBox NextGen enterprise AI team."
       />
 
-      <div className="win95-window w-full max-w-4xl flex flex-col">
-        {/* Title Bar */}
-        <div className="win95-header flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Mail className="w-4 h-4" />
-            <span>Contact_LifeBox.exe</span>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[400px] bg-cyan-500/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+
+      <div className="w-full max-w-5xl px-6 flex flex-col z-10">
+        
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-[#ff00ff]/30 bg-[#ff00ff]/5 text-[#ff00ff] text-xs font-bold uppercase tracking-widest mb-4">
+            <span className="w-2 h-2 bg-[#ff00ff] shadow-[0_0_8px_#ff00ff]"></span>
+            Initialize Connection
           </div>
-          <div className="flex gap-1">
-            <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold pb-1">_</button>
-            <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">□</button>
-            <button className="win95-btn w-5 h-5 flex items-center justify-center text-[12px] font-bold">X</button>
-          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 font-['Space_Grotesk'] tracking-wide text-white uppercase">
+            Partner with <span className="neon-text-cyan">LifeBox</span>
+          </h1>
+          <p className="text-slate-400 font-['Inter'] text-lg">
+            Ready to upgrade your infrastructure with state-of-the-art AI?
+          </p>
         </div>
 
-        {/* Content */}
-        <div className="p-4 grid lg:grid-cols-2 gap-6 text-black bg-[#c0c0c0]">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
           
           {/* Info Side */}
-          <div className="space-y-4 min-w-0">
-            <div className="border-2 border-[#808080] border-r-white border-b-white p-4">
-              <h1 className="text-2xl font-bold mb-4 font-['Courier_New'] text-[#000080]">
-                Partner with LifeBox
-              </h1>
-              <div className="w-full overflow-hidden bg-black text-[#00ff00] font-['Courier_New'] p-1 mb-4 border-2 border-[#808080] border-r-white border-b-white">
-                <span className="animate-marquee block">Ready to upgrade your infrastructure?</span>
-              </div>
-              
-              <div className="space-y-4 font-['Courier_New'] font-bold">
-                <div className="flex items-start gap-2">
-                  <Mail className="h-5 w-5 text-[#000080]" />
-                  <div>
-                    <div className="uppercase">Email Us</div>
-                    <a href="mailto:careers@lifeboxnetgen.co.site" className="text-[#0000ee] hover:text-[#551a8b] underline break-all">careers@lifeboxnetgen.co.site</a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2">
-                  <MapPin className="h-5 w-5 text-[#000080]" />
-                  <div>
-                    <div className="uppercase">HQ Location</div>
-                    <a href="https://maps.app.goo.gl/asDaoeCWMkFf2Sjo9" target="_blank" rel="noopener noreferrer" className="text-[#0000ee] hover:text-[#551a8b] underline">
-                      LifeBox NextGen Pvt. Ltd.<br/>
-                      Narasaraopet, AP 522615
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="space-y-6 tech-card tech-border-glow p-8 bg-black">
+            <h2 className="text-2xl font-bold font-['Space_Grotesk'] text-white uppercase tracking-wider mb-8 flex items-center gap-3">
+              <Terminal className="w-6 h-6 text-cyan-400" /> System Params
+            </h2>
             
-            <div className="flex justify-center border-2 border-[#808080] border-r-white border-b-white p-2 bg-white">
-               <img src="https://media.giphy.com/media/26FPCXdkvDbKBbgOI/giphy.gif" alt="Under Construction" className="h-16" />
+            <div className="space-y-8 font-['Inter']">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 border border-cyan-400/50 bg-cyan-400/10 flex items-center justify-center shrink-0">
+                  <Mail className="h-5 w-5 text-cyan-400" />
+                </div>
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-slate-500 mb-1 font-['Space_Grotesk'] font-bold">Secure Protocol</div>
+                  <a href="mailto:careers@lifeboxnetgen.co.site" className="text-white hover:text-cyan-400 transition-colors break-all text-lg">careers@lifeboxnetgen.co.site</a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 border border-[#ff00ff]/50 bg-[#ff00ff]/10 flex items-center justify-center shrink-0">
+                  <MapPin className="h-5 w-5 text-[#ff00ff]" />
+                </div>
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-slate-500 mb-1 font-['Space_Grotesk'] font-bold">Physical Node</div>
+                  <a href="https://maps.app.goo.gl/asDaoeCWMkFf2Sjo9" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#ff00ff] transition-colors leading-relaxed">
+                    LifeBox NextGen Pvt. Ltd.<br/>
+                    Narasaraopet, AP 522615
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Form Side */}
-          <div className="border-2 border-[#808080] border-r-white border-b-white p-4 min-w-0">
+          <div className="tech-card tech-border-glow p-8 bg-black">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <div className="grid md:grid-cols-2 gap-4">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
                   <FormField
                     control={form.control}
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-bold text-black font-['Courier_New']">Full Name:</FormLabel>
+                        <FormLabel className="text-slate-400 font-['Space_Grotesk'] uppercase tracking-wider text-xs">Operator Name</FormLabel>
                         <FormControl>
-                          <Input {...field} className="win95-input h-8 rounded-none border-0" />
+                          <Input {...field} className="bg-transparent border-white/20 text-white focus-visible:ring-cyan-400 focus-visible:border-cyan-400 rounded-none h-12 font-['Inter']" placeholder="Enter name" />
                         </FormControl>
-                        <FormMessage className="text-[#ff0000]" />
+                        <FormMessage className="text-red-400" />
                       </FormItem>
                     )}
                   />
@@ -137,11 +134,11 @@ const Contact = () => {
                     name="company"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-bold text-black font-['Courier_New']">Company:</FormLabel>
+                        <FormLabel className="text-slate-400 font-['Space_Grotesk'] uppercase tracking-wider text-xs">Organization ID</FormLabel>
                         <FormControl>
-                          <Input {...field} className="win95-input h-8 rounded-none border-0" />
+                          <Input {...field} className="bg-transparent border-white/20 text-white focus-visible:ring-cyan-400 focus-visible:border-cyan-400 rounded-none h-12 font-['Inter']" placeholder="Enter company" />
                         </FormControl>
-                        <FormMessage className="text-[#ff0000]" />
+                        <FormMessage className="text-red-400" />
                       </FormItem>
                     )}
                   />
@@ -152,11 +149,11 @@ const Contact = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="font-bold text-black font-['Courier_New']">Work Email:</FormLabel>
+                      <FormLabel className="text-slate-400 font-['Space_Grotesk'] uppercase tracking-wider text-xs">Return Address</FormLabel>
                       <FormControl>
-                        <Input {...field} className="win95-input h-8 rounded-none border-0" />
+                        <Input {...field} className="bg-transparent border-white/20 text-white focus-visible:ring-cyan-400 focus-visible:border-cyan-400 rounded-none h-12 font-['Inter']" placeholder="Enter work email" />
                       </FormControl>
-                      <FormMessage className="text-[#ff0000]" />
+                      <FormMessage className="text-red-400" />
                     </FormItem>
                   )}
                 />
@@ -166,24 +163,25 @@ const Contact = () => {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="font-bold text-black font-['Courier_New']">Message:</FormLabel>
+                      <FormLabel className="text-slate-400 font-['Space_Grotesk'] uppercase tracking-wider text-xs">Encrypted Payload</FormLabel>
                       <FormControl>
                         <Textarea
-                          className="win95-input min-h-[100px] resize-none rounded-none border-0"
+                          className="bg-transparent border-white/20 text-white focus-visible:ring-cyan-400 focus-visible:border-cyan-400 rounded-none min-h-[150px] resize-none font-['Inter']"
+                          placeholder="Describe your requirements..."
                           {...field}
                         />
                       </FormControl>
-                      <FormMessage className="text-[#ff0000]" />
+                      <FormMessage className="text-red-400" />
                     </FormItem>
                   )}
                 />
 
-                <div className="pt-4 flex justify-end gap-2">
-                  <Button type="button" onClick={() => form.reset()} className="win95-btn h-8 px-4 rounded-none font-bold">
-                    Cancel
+                <div className="pt-4 flex gap-4">
+                  <Button type="button" onClick={() => form.reset()} variant="outline" className="h-12 px-6 rounded-none font-['Space_Grotesk'] tracking-wider uppercase border-white/20 text-slate-300 hover:text-white hover:bg-white/10 w-full sm:w-auto">
+                    Abort
                   </Button>
-                  <Button type="submit" className="win95-btn h-8 px-4 rounded-none font-bold">
-                    OK <ArrowRight className="ml-2 w-3 h-3 inline" />
+                  <Button type="submit" className="btn-tech h-12 px-8 rounded-none w-full sm:w-auto">
+                    Transmit <ArrowRight className="ml-2 w-4 h-4 inline" />
                   </Button>
                 </div>
               </form>
