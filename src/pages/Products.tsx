@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -27,6 +28,7 @@ const products = [
   {
     icon: Brain,
     title: "Gnan AI",
+    link: "/gnan-ai",
     tagline: "AI-driven interview intelligence.",
     overview: "Gnan AI is an advanced career intelligence ecosystem designed to automate technical screening and behavioral analysis. By leveraging state-of-the-art NLP and behavioral modeling, it reduces hiring time by 70% while ensuring objective, data-backed candidate matching for modern enterprises.",
     features: [
@@ -168,11 +170,19 @@ const Products = () => {
               </div>
 
               {p.link && (
-                <Button asChild className="btn-tech h-12 px-8 text-sm">
-                  <a href={p.link} target="_blank" rel="noopener noreferrer">
-                    Initialize Application <ArrowRight className="ml-2 w-4 h-4 inline" />
-                  </a>
-                </Button>
+                p.link.startsWith('/') ? (
+                  <Button asChild className="btn-tech h-12 px-8 text-sm">
+                    <Link to={p.link}>
+                      Explore Platform <ArrowRight className="ml-2 w-4 h-4 inline" />
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button asChild className="btn-tech h-12 px-8 text-sm">
+                    <a href={p.link} target="_blank" rel="noopener noreferrer">
+                      Initialize Application <ArrowRight className="ml-2 w-4 h-4 inline" />
+                    </a>
+                  </Button>
+                )
               )}
             </div>
           ))}

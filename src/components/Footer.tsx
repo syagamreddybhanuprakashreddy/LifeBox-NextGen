@@ -46,7 +46,7 @@ const Footer = () => {
             {
               title: "Platform",
               links: [
-                { l: "Gnan AI", h: "/products#gnan-ai" },
+                { l: "Gnan AI", h: "/gnan-ai" },
                 { l: "LifeOS", h: "https://lifebox-community.web.app/" },
                 { l: "ERP Core", h: "/products" },
                 { l: "Services", h: "/services" }

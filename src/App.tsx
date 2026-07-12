@@ -14,6 +14,7 @@ import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
+import GnanAI from "./pages/GnanAI";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/careers" element={<Careers />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/gnan-ai" element={<GnanAI />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
