@@ -19,8 +19,12 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-[100] bg-black/80 backdrop-blur-md border-b border-white/10">
       <nav className="container mx-auto max-w-7xl flex items-center justify-between px-6 h-20">
         <Link to="/" className="flex items-center gap-3 z-50 group">
-          <div className="relative flex items-center justify-center w-10 h-10 border border-cyan-400 bg-cyan-400/10 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
-            <Cpu className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
+          <div className="relative flex items-center justify-center w-10 h-10 border border-cyan-400 bg-black overflow-hidden shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+            <img 
+              src="https://i.ibb.co/k6P7hnvb/Whats-App-Image-2026-01-09-at-13-40-57.jpg" 
+              alt="LifeBox NextGen" 
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            />
           </div>
           <span className="text-2xl font-bold tracking-tight text-white hidden sm:block font-['Space_Grotesk']">
             LifeBox NextGen
