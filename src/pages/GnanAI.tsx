@@ -55,8 +55,13 @@ const GnanAI = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
             <div className="flex-1 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 font-medium text-sm mb-6 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
-                <Sparkles className="w-4 h-4" /> Next-Generation Career Ecosystem
+              <div className="flex flex-col lg:flex-row items-center gap-6 mb-8 justify-center lg:justify-start">
+                <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 flex items-center justify-center">
+                  <img src="/gnan-ai-logo-transparent.png" alt="Gnan AI Logo" className="w-full h-full object-contain drop-shadow-[0_0_25px_rgba(255,0,255,0.8)] scale-110" />
+                </div>
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 font-bold text-sm shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+                  <Sparkles className="w-5 h-5" /> Next-Generation Career Ecosystem
+                </div>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6 tracking-tight">
                 AI-Powered <br className="hidden lg:block"/>
@@ -66,11 +71,11 @@ const GnanAI = () => {
                 GNAN-AI simulates realistic interview environments, evaluates performance, and delivers personalized learning roadmaps to accelerate your career growth.
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                <Button className="h-14 px-8 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium text-lg w-full sm:w-auto shadow-[0_0_20px_rgba(147,51,234,0.3)] transition-all">
-                  Book a Demo
+                <Button asChild className="h-14 px-8 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium text-lg w-full sm:w-auto shadow-[0_0_20px_rgba(147,51,234,0.3)] transition-all">
+                  <a href="https://gnan-ai.in">Launch Platform</a>
                 </Button>
-                <Button variant="outline" className="h-14 px-8 bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-lg font-medium text-lg w-full sm:w-auto backdrop-blur-sm transition-all">
-                  Explore Features
+                <Button asChild variant="outline" className="h-14 px-8 bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-lg font-medium text-lg w-full sm:w-auto backdrop-blur-sm transition-all">
+                  <a href="https://gnan-ai.in">Book a Demo</a>
                 </Button>
               </div>
             </div>
@@ -208,8 +213,8 @@ const GnanAI = () => {
                   </div>
                 ))}
               </div>
-              <Button className="mt-10 h-12 px-8 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all">
-                View Architecture
+              <Button asChild className="mt-10 h-12 px-8 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all">
+                <a href="https://gnan-ai.in">Initialize Platform</a>
               </Button>
             </div>
             
@@ -270,11 +275,11 @@ const GnanAI = () => {
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">Transform Interview <br/> Preparation with AI</h2>
           <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">Prepare Smarter. Perform Better. Get Hired.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button className="h-14 px-10 bg-white text-black hover:bg-slate-200 rounded-lg font-bold text-lg w-full sm:w-auto transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-              Schedule a Demo
+            <Button asChild className="h-14 px-10 bg-white text-black hover:bg-slate-200 rounded-lg font-bold text-lg w-full sm:w-auto transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+              <a href="https://gnan-ai.in">Launch Gnan AI Ecosystem</a>
             </Button>
-            <Button variant="outline" className="h-14 px-10 bg-transparent border-white/20 hover:bg-white/10 text-white rounded-lg font-medium text-lg w-full sm:w-auto transition-all">
-              Contact Sales
+            <Button asChild variant="outline" className="h-14 px-10 bg-transparent border-white/20 hover:bg-white/10 text-white rounded-lg font-medium text-lg w-full sm:w-auto transition-all">
+              <Link to="/contact">Contact Sales</Link>
             </Button>
           </div>
         </div>

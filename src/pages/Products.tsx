@@ -8,6 +8,25 @@ import Seo from "@/components/Seo";
 
 const products = [
   {
+    icon: Brain,
+    imgLogo: "/gnan-ai-logo-transparent.png",
+    title: "Gnan AI",
+    link: "/gnan-ai",
+    tagline: "AI-driven interview intelligence.",
+    overview: "Gnan AI is an advanced career intelligence ecosystem designed to automate technical screening and behavioral analysis. By leveraging state-of-the-art NLP and behavioral modeling, it reduces hiring time by 70% while ensuring objective, data-backed candidate matching for modern enterprises.",
+    features: [
+      "Natural Language Processing (NLP)",
+      "Code Execution Sandbox",
+      "Plagiarism Detection",
+      "Behavioral Sentiment Analysis"
+    ],
+    architecture: "Python (FastAPI) • TensorFlow • Redis",
+    users: "HR Teams, Tech Recruiters, Enterprises",
+    benefits: ["Eliminate bias", "Scale hiring instantly", "Deep technical evaluation"],
+    featured: true,
+    color: "magenta"
+  },
+  {
     icon: GraduationCap,
     title: "NextGenFreedu",
     link: "https://nextgenfreedu.site",
@@ -24,24 +43,6 @@ const products = [
     benefits: ["Standardized assessment", "Fraud-proof certification", "Data-driven student insights"],
     featured: true,
     color: "cyan"
-  },
-  {
-    icon: Brain,
-    title: "Gnan AI",
-    link: "/gnan-ai",
-    tagline: "AI-driven interview intelligence.",
-    overview: "Gnan AI is an advanced career intelligence ecosystem designed to automate technical screening and behavioral analysis. By leveraging state-of-the-art NLP and behavioral modeling, it reduces hiring time by 70% while ensuring objective, data-backed candidate matching for modern enterprises.",
-    features: [
-      "Natural Language Processing (NLP)",
-      "Code Execution Sandbox",
-      "Plagiarism Detection",
-      "Behavioral Sentiment Analysis"
-    ],
-    architecture: "Python (FastAPI) • TensorFlow • Redis",
-    users: "HR Teams, Tech Recruiters, Enterprises",
-    benefits: ["Eliminate bias", "Scale hiring instantly", "Deep technical evaluation"],
-    featured: true,
-    color: "magenta"
   },
   {
     icon: Globe,
@@ -122,8 +123,8 @@ const Products = () => {
             <div key={p.title} className="tech-card tech-border-glow p-8 bg-black">
               <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-white/10 pb-6 mb-6 gap-4">
                 <div className="flex items-center gap-4">
-                  <div className={`w-14 h-14 border flex items-center justify-center shrink-0 ${p.color === 'cyan' ? 'border-cyan-400 text-cyan-400 shadow-[0_0_10px_rgba(0,240,255,0.2)]' : 'border-[#ff00ff] text-[#ff00ff] shadow-[0_0_10px_rgba(255,0,255,0.2)]'}`}>
-                    <p.icon className="h-6 w-6" />
+                  <div className={`${p.imgLogo ? 'w-32 h-32 sm:w-48 sm:h-48' : 'w-16 h-16'} flex items-center justify-center shrink-0 ${p.imgLogo ? '' : `border ${p.color === 'cyan' ? 'border-cyan-400 text-cyan-400 shadow-[0_0_10px_rgba(0,240,255,0.2)]' : 'border-[#ff00ff] text-[#ff00ff] shadow-[0_0_10px_rgba(255,0,255,0.2)] bg-white/5'} p-4`}`}>
+                    {p.imgLogo ? <img src={p.imgLogo} alt={p.title} className="w-full h-full object-contain drop-shadow-[0_0_12px_rgba(255,0,255,0.6)]" /> : <p.icon className="h-8 w-8" />}
                   </div>
                   <div>
                     <h2 className={`text-2xl font-bold uppercase font-['Space_Grotesk'] tracking-wide ${p.color === 'cyan' ? 'text-white' : 'text-white'}`}>{p.title}</h2>
@@ -178,8 +179,8 @@ const Products = () => {
                   </Button>
                 ) : (
                   <Button asChild className="btn-tech h-12 px-8 text-sm">
-                    <a href={p.link} target="_blank" rel="noopener noreferrer">
-                      Initialize Application <ArrowRight className="ml-2 w-4 h-4 inline" />
+                    <a href={p.link}>
+                      Explore Platform <ArrowRight className="ml-2 w-4 h-4 inline" />
                     </a>
                   </Button>
                 )

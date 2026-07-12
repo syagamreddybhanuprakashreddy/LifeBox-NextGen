@@ -12,14 +12,14 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-6 w-fit group">
-              <div className="w-10 h-10 border border-cyan-400/50 bg-black overflow-hidden flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(0,240,255,0.1)]">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center shrink-0">
                 <img 
-                  src="https://i.ibb.co/k6P7hnvb/Whats-App-Image-2026-01-09-at-13-40-57.jpg" 
+                  src="https://i.ibb.co/NkyZ4yj/Image-12-07-26-at-9-48-PM-Photoroom.png" 
                   alt="LifeBox NextGen" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  className="w-full h-full object-contain p-1 group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white uppercase font-['Space_Grotesk']">
+              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white uppercase font-['Space_Grotesk']">
                 LifeBox NextGen
               </span>
             </Link>
