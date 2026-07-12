@@ -73,9 +73,9 @@ const CaseStudies = () => {
                 {studies.map((s, i) => (
                   <div key={i} className="border-2 border-[#808080] border-r-white border-b-white p-4 bg-[#c0c0c0] flex flex-col justify-between">
                     <div>
-                      <div className="flex justify-between items-start mb-4 border-b border-[#808080] pb-2">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 border-b border-[#808080] pb-2 gap-2">
                         <span className="font-bold underline text-[#000080]">{s.category}</span>
-                        <span className="text-sm font-bold bg-white px-1 border border-[#808080]">{s.client}</span>
+                        <span className="text-sm font-bold bg-white px-1 border border-[#808080] self-start">{s.client}</span>
                       </div>
                       <h3 className="text-xl font-bold mb-2">{s.title}</h3>
                       <p className="font-bold text-sm mb-4">{s.desc}</p>

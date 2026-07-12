@@ -78,7 +78,7 @@ const Contact = () => {
         <div className="p-4 grid lg:grid-cols-2 gap-6 text-black bg-[#c0c0c0]">
           
           {/* Info Side */}
-          <div className="space-y-4">
+          <div className="space-y-4 min-w-0">
             <div className="border-2 border-[#808080] border-r-white border-b-white p-4">
               <h1 className="text-2xl font-bold mb-4 font-['Courier_New'] text-[#000080]">
                 Partner with LifeBox
@@ -92,7 +92,7 @@ const Contact = () => {
                   <Mail className="h-5 w-5 text-[#000080]" />
                   <div>
                     <div className="uppercase">Email Us</div>
-                    <a href="mailto:careers@lifeboxnetgen.co.site" className="text-[#0000ee] hover:text-[#551a8b] underline">careers@lifeboxnetgen.co.site</a>
+                    <a href="mailto:careers@lifeboxnetgen.co.site" className="text-[#0000ee] hover:text-[#551a8b] underline break-all">careers@lifeboxnetgen.co.site</a>
                   </div>
                 </div>
 
@@ -115,7 +115,7 @@ const Contact = () => {
           </div>
 
           {/* Form Side */}
-          <div className="border-2 border-[#808080] border-r-white border-b-white p-4">
+          <div className="border-2 border-[#808080] border-r-white border-b-white p-4 min-w-0">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">

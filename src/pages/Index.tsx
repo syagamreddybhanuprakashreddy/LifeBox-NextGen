@@ -97,8 +97,8 @@ const Index = () => {
             </div>
 
             {/* Extended Capabilities */}
-            <h2 className="text-2xl font-bold mb-4 text-[#000080] underline">C:\Services\</h2>
-            <div className="border-2 border-[#808080] border-r-white border-b-white p-4 bg-white max-h-[300px] overflow-y-scroll">
+            <h2 className="text-2xl font-bold mb-4 text-[#000080] underline">C:\\Services\\</h2>
+            <div className="border-2 border-[#808080] border-r-white border-b-white p-4 bg-white max-h-[300px] overflow-y-auto overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead className="bg-[#c0c0c0] border-b-2 border-[#808080]">
                   <tr>
