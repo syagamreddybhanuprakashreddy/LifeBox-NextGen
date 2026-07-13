@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
-import { ShieldCheck, XCircle, Loader2, Calendar, Building2, User, Award } from "lucide-react";
+import { ShieldCheck, XCircle, Loader2, Calendar, Building2, User, Award, Linkedin } from "lucide-react";
 import Seo from "@/components/Seo";
+import { Button } from "@/components/ui/button";
 
 interface Certificate {
   id: string;
@@ -50,6 +51,8 @@ const VerifyCertificate = () => {
       </div>
     );
   }
+
+  const linkedInUrl = certificate ? `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(certificate.workshop_name)}&organizationName=${encodeURIComponent("LifeBox NextGen")}&issueYear=${new Date(certificate.start_date).getFullYear()}&issueMonth=${new Date(certificate.start_date).getMonth() + 1}&certId=${encodeURIComponent(certificate.certificate_id)}&certUrl=${encodeURIComponent(window.location.origin + "/verify/" + certificate.id)}` : "";
 
   return (
     <div className="min-h-screen pt-24 pb-12 flex flex-col items-center justify-center relative overflow-hidden bg-black text-white px-6">
@@ -120,9 +123,16 @@ const VerifyCertificate = () => {
                 </div>
               </div>
               
-              <div className="pt-6 border-t border-white/10 text-center">
+              <div className="pt-6 border-t border-white/10 text-center flex flex-col items-center gap-6">
+                <Button 
+                  onClick={() => window.open(linkedInUrl, '_blank')}
+                  className="bg-[#0A66C2] hover:bg-[#004182] text-white rounded-none font-['Space_Grotesk'] tracking-wide uppercase px-6 h-12 flex items-center gap-2 border border-[#0A66C2]/50 hover:border-[#0A66C2]"
+                >
+                  <Linkedin className="w-5 h-5" />
+                  Add to LinkedIn Profile
+                </Button>
                 <p className="text-xs text-slate-500 font-mono">
-                  ID: {certificate.id}
+                  Ref: {certificate.id}
                   <br />
                   Issued on: {new Date(certificate.created_at).toLocaleString()}
                 </p>
