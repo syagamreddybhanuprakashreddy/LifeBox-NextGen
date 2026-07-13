@@ -52,7 +52,7 @@ const VerifyCertificate = () => {
     );
   }
 
-  const linkedInUrl = certificate ? `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(certificate.workshop_name)}&organizationName=${encodeURIComponent("LifeBox NextGen")}&issueYear=${new Date(certificate.start_date).getFullYear()}&issueMonth=${new Date(certificate.start_date).getMonth() + 1}&certId=${encodeURIComponent(certificate.certificate_id)}&certUrl=${encodeURIComponent(window.location.origin + "/verify/" + certificate.id)}` : "";
+  const linkedInUrl = certificate ? `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(certificate.workshop_name)}&organizationName=${encodeURIComponent("LifeBox NextGen")}&issueYear=${new Date(certificate.start_date).getFullYear()}&issueMonth=${new Date(certificate.start_date).getMonth() + 1}&certId=${encodeURIComponent(certificate.id)}&certUrl=${encodeURIComponent("https://www.lifeboxnextgen.com/verify/" + certificate.id)}` : "";
 
   return (
     <div className="min-h-screen pt-24 pb-12 flex flex-col items-center justify-center relative overflow-hidden bg-black text-white px-6">
@@ -80,8 +80,18 @@ const VerifyCertificate = () => {
                 <div>
                   <h2 className="text-2xl font-bold text-green-400 font-['Space_Grotesk'] uppercase tracking-wider">Verified Authentic</h2>
                   <p className="text-slate-400 font-['Inter'] text-sm mt-1">This certificate was officially issued by LifeBox NextGen.</p>
-                  <div className="mt-4 inline-block bg-cyan-500/10 border border-cyan-500/30 px-4 py-2 rounded">
+                  <div className="mt-4 inline-block bg-cyan-500/10 border border-cyan-500/30 px-4 py-2 rounded mb-6">
                     <p className="text-cyan-400 font-mono font-bold tracking-widest uppercase text-sm">No: {certificate.certificate_id}</p>
+                  </div>
+                  
+                  <div className="flex justify-center">
+                    <Button 
+                      onClick={() => window.open(linkedInUrl, '_blank')}
+                      className="bg-[#0A66C2] hover:bg-[#004182] text-white rounded-none font-['Space_Grotesk'] tracking-wide uppercase px-6 h-12 flex items-center gap-2 border border-[#0A66C2]/50 hover:border-[#0A66C2]"
+                    >
+                      <Linkedin className="w-5 h-5" />
+                      Add to LinkedIn Profile
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -123,14 +133,7 @@ const VerifyCertificate = () => {
                 </div>
               </div>
               
-              <div className="pt-6 border-t border-white/10 text-center flex flex-col items-center gap-6">
-                <Button 
-                  onClick={() => window.open(linkedInUrl, '_blank')}
-                  className="bg-[#0A66C2] hover:bg-[#004182] text-white rounded-none font-['Space_Grotesk'] tracking-wide uppercase px-6 h-12 flex items-center gap-2 border border-[#0A66C2]/50 hover:border-[#0A66C2]"
-                >
-                  <Linkedin className="w-5 h-5" />
-                  Add to LinkedIn Profile
-                </Button>
+              <div className="pt-6 border-t border-white/10 text-center flex flex-col items-center">
                 <p className="text-xs text-slate-500 font-mono">
                   Ref: {certificate.id}
                   <br />
