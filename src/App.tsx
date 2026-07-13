@@ -15,6 +15,8 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Privacy from "./pages/Privacy";
 import GnanAI from "./pages/GnanAI";
+import AdminCertificates from "./pages/AdminCertificates";
+import VerifyCertificate from "./pages/VerifyCertificate";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +25,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
@@ -36,6 +38,8 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/gnan-ai" element={<GnanAI />} />
+            <Route path="/admin/certificates" element={<AdminCertificates />} />
+            <Route path="/verify/:id" element={<VerifyCertificate />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
