@@ -17,6 +17,7 @@ import Privacy from "./pages/Privacy";
 import GnanAI from "./pages/GnanAI";
 import AdminCertificates from "./pages/AdminCertificates";
 import VerifyCertificate from "./pages/VerifyCertificate";
+import AdminPasswords from "./pages/AdminPasswords";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/gnan-ai" element={<GnanAI />} />
             <Route path="/admin/certificates" element={<AdminCertificates />} />
+            <Route path="/admin/passwords" element={<AdminPasswords />} />
             <Route path="/verify/:id" element={<VerifyCertificate />} />
           </Route>
           <Route path="*" element={<NotFound />} />

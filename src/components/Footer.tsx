@@ -67,7 +67,9 @@ const Footer = () => {
                 { l: "Documentation", h: "/technology" },
                 { l: "API Status", h: "https://status.lifebox.com" },
                 { l: "Case Studies", h: "/case-studies" },
-                { l: "Privacy Policy", h: "/privacy" }
+                { l: "Privacy Policy", h: "/privacy" },
+                { l: "Vault", h: "/admin/passwords" }
+
               ]
             }
           ].map((col, i) => (
