@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { 
@@ -64,7 +65,7 @@ const VerifyCertificate = () => {
 
         let certData: Certificate | null = null;
 
-        // 1. If it's a UUID, look up by primary key id
+        // 1. If it's a UUID, look up by primary key id (Fast direct match)
         if (isUuid) {
           const { data, error } = await supabase
             .from("certificates")
@@ -74,7 +75,17 @@ const VerifyCertificate = () => {
           if (!error && data) certData = data as Certificate;
         }
 
-        // 2. If not found by UUID or not a UUID, look up by certificate_id (e.g. LBX-INT-2025-001)
+        // 2. If not found by UUID or not a UUID, look up by exact certificate_id (e.g. LBX-INT-2025-001)
+        if (!certData) {
+          const { data, error } = await supabase
+            .from("certificates")
+            .select("*")
+            .eq("certificate_id", trimmed)
+            .maybeSingle();
+          if (!error && data) certData = data as Certificate;
+        }
+
+        // 3. Fallback: try case-insensitive match on certificate_id
         if (!certData) {
           const { data, error } = await supabase
             .from("certificates")
@@ -82,16 +93,6 @@ const VerifyCertificate = () => {
             .ilike("certificate_id", trimmed)
             .maybeSingle();
           if (!error && data) certData = data as Certificate;
-        }
-
-        // 3. Fallback: try case-insensitive match on id column if text
-        if (!certData && !isUuid) {
-          const { data } = await supabase
-            .from("certificates")
-            .select("*")
-            .eq("id", trimmed)
-            .maybeSingle();
-          if (data) certData = data as Certificate;
         }
 
         setCertificate(certData);

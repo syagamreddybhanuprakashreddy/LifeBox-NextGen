@@ -272,14 +272,17 @@ const AdminCertificates = () => {
     });
   };
 
-  // Base canonical domain for QR Codes
-  const canonicalDomain = window.location.origin.includes("localhost")
-    ? window.location.origin
-    : "https://www.lifeboxnextgen.com";
+  // Base canonical domain for official QR Codes is always the live public domain
+  const canonicalDomain = "https://www.lifeboxnextgen.com";
 
   const typeParam = activeCert?.type === "internship" ? "?type=internship" : "?type=workshop";
+  const verificationTarget = activeCert?.id || activeCert?.certificate_id || "";
   const verificationUrl = activeCert
-    ? `${canonicalDomain}/verify/${encodeURIComponent(activeCert.certificate_id || activeCert.id)}${typeParam}`
+    ? `${canonicalDomain}/verify/${encodeURIComponent(verificationTarget)}${typeParam}`
+    : "";
+
+  const localTestUrl = activeCert
+    ? `${window.location.origin}/verify/${encodeURIComponent(verificationTarget)}${typeParam}`
     : "";
 
   const handleCopyLink = () => {
