@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate, Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { 
   ShieldCheck, 
@@ -37,6 +36,9 @@ interface Certificate {
 
 const VerifyCertificate = () => {
   const { id } = useParams<{ id: string }>();
+  const [searchParams] = useSearchParams();
+  const urlType = searchParams.get("type")?.toLowerCase();
+
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -110,26 +112,44 @@ const VerifyCertificate = () => {
     navigate(`/verify/${encodeURIComponent(searchQuery.trim())}`);
   };
 
-  const isInternship = certificate ? (
-    certificate.certificate_type === "internship" ||
-    certificate.workshop_name?.toLowerCase().includes("intern") ||
-    certificate.certificate_id?.toLowerCase().includes("int")
-  ) : false;
+  // Check if explicitly workshop:
+  const isExplicitWorkshop = Boolean(
+    urlType === "workshop" ||
+    certificate?.certificate_type === "workshop" ||
+    certificate?.certificate_id?.toLowerCase().includes("ws-") ||
+    certificate?.certificate_id?.toLowerCase().startsWith("lbx-ws") ||
+    certificate?.workshop_name?.toLowerCase().includes("workshop")
+  );
+
+  // Check if explicitly internship:
+  const isExplicitInternship = Boolean(
+    urlType === "internship" ||
+    certificate?.certificate_type === "internship" ||
+    certificate?.certificate_id?.toLowerCase().includes("int") ||
+    certificate?.certificate_id?.toLowerCase().includes("intern") ||
+    certificate?.workshop_name?.toLowerCase().includes("intern")
+  );
+
+  // Default to internship unless explicitly designated as a workshop
+  const isInternship = certificate ? (isExplicitInternship || !isExplicitWorkshop) : false;
+
+  const rawTopic = certificate?.workshop_name || "";
+  // Strip out any trailing "(Internship)", "(Workshop)", or "Internship" from display so domain looks pristine
+  const cleanDomain = rawTopic
+    .replace(/\s*\((?:Internship|Workshop)\)/gi, "")
+    .replace(/\s*(?:Internship|Workshop)\s*$/gi, "")
+    .trim() || rawTopic;
 
   const certTypeLabel = isInternship ? "Internship Certificate" : "Workshop Certificate";
-  const roleOrTopicLabel = isInternship ? "Internship Domain / Role" : "Workshop Name";
+  const roleOrTopicLabel = isInternship ? "Internship Domain / Role" : "Workshop Topic / Name";
 
   // Pre-formatted LinkedIn Certification Name
   const getLinkedInCertName = () => {
     if (!certificate) return "";
-    const name = certificate.workshop_name || "";
     if (isInternship) {
-      if (name.toLowerCase().includes("intern")) {
-        return name;
-      }
-      return `${name} Internship`;
+      return `${cleanDomain} Internship`;
     }
-    return `${name} Workshop`;
+    return `${cleanDomain} Workshop`;
   };
 
   // Base Verification URL (prefer public domain, fallback to origin)
@@ -137,8 +157,9 @@ const VerifyCertificate = () => {
     ? window.location.origin
     : "https://www.lifeboxnextgen.com";
 
+  const typeParam = isInternship ? "?type=internship" : "?type=workshop";
   const verificationUrl = certificate
-    ? `${canonicalDomain}/verify/${certificate.certificate_id || certificate.id}`
+    ? `${canonicalDomain}/verify/${encodeURIComponent(certificate.certificate_id || certificate.id)}${typeParam}`
     : "";
 
   const startDate = certificate?.start_date ? new Date(certificate.start_date) : new Date();
@@ -314,7 +335,7 @@ const VerifyCertificate = () => {
                     {roleOrTopicLabel}
                   </p>
                   <p className="text-lg font-semibold text-cyan-400">
-                    {certificate.workshop_name}
+                    {cleanDomain}
                   </p>
                   {isInternship && (
                     <p className="text-xs text-slate-400 mt-0.5">

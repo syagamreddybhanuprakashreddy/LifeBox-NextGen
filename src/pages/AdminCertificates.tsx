@@ -90,12 +90,19 @@ const AdminCertificates = () => {
       if (error) throw error;
       return (data || []).map((item: any) => {
         // Normalize type
-        const isIntern = item.certificate_type === 'internship' ||
+        const isExplicitWs = item.certificate_type === 'workshop' ||
+          item.workshop_name?.toLowerCase().includes('workshop') ||
+          item.certificate_id?.toLowerCase().includes('ws-') ||
+          item.certificate_id?.toLowerCase().startsWith('lbx-ws');
+
+        const isExplicitInt = item.certificate_type === 'internship' ||
           item.workshop_name?.toLowerCase().includes('intern') ||
           item.certificate_id?.toLowerCase().includes('int');
+
+        const isIntern = isExplicitInt || !isExplicitWs;
         return {
           ...item,
-          certificate_type: isIntern ? 'internship' : (item.certificate_type || 'workshop')
+          certificate_type: isIntern ? 'internship' : 'workshop'
         } as Certificate;
       });
     }
@@ -122,12 +129,18 @@ const AdminCertificates = () => {
           .select()
           .single();
 
-        // If error due to missing certificate_type column in Postgres, fallback without it
+        // If error due to missing certificate_type column in Postgres, fallback without it and enrich workshop_name
         if (res.error && res.error.message?.includes('certificate_type')) {
           const { certificate_type, ...fallbackVals } = values;
+          const enrichedVals = {
+            ...fallbackVals,
+            workshop_name: values.certificate_type === "internship" && !fallbackVals.workshop_name.toLowerCase().includes("intern")
+              ? `${fallbackVals.workshop_name} (Internship)`
+              : fallbackVals.workshop_name
+          };
           res = await supabase
             .from('certificates')
-            .update(fallbackVals)
+            .update(enrichedVals)
             .eq('id', editingId)
             .select()
             .single();
@@ -143,12 +156,18 @@ const AdminCertificates = () => {
           .select()
           .single();
 
-        // If error due to missing certificate_type column, fallback
+        // If error due to missing certificate_type column, fallback and enrich workshop_name
         if (res.error && res.error.message?.includes('certificate_type')) {
           const { certificate_type, ...fallbackVals } = values;
+          const enrichedVals = {
+            ...fallbackVals,
+            workshop_name: values.certificate_type === "internship" && !fallbackVals.workshop_name.toLowerCase().includes("intern")
+              ? `${fallbackVals.workshop_name} (Internship)`
+              : fallbackVals.workshop_name
+          };
           res = await supabase
             .from('certificates')
-            .insert([fallbackVals])
+            .insert([enrichedVals])
             .select()
             .single();
         }
@@ -258,8 +277,9 @@ const AdminCertificates = () => {
     ? window.location.origin
     : "https://www.lifeboxnextgen.com";
 
+  const typeParam = activeCert?.type === "internship" ? "?type=internship" : "?type=workshop";
   const verificationUrl = activeCert
-    ? `${canonicalDomain}/verify/${activeCert.certificate_id || activeCert.id}`
+    ? `${canonicalDomain}/verify/${encodeURIComponent(activeCert.certificate_id || activeCert.id)}${typeParam}`
     : "";
 
   const handleCopyLink = () => {
@@ -797,7 +817,7 @@ const AdminCertificates = () => {
                           {cert.candidate_name}
                         </td>
                         <td className="py-4 pr-4 text-slate-200">
-                          {cert.workshop_name}
+                          {cert.workshop_name.replace(/\s*\((?:Internship|Workshop)\)/gi, "").replace(/\s*(?:Internship|Workshop)\s*$/gi, "")}
                         </td>
                         <td className="py-4 pr-4 text-slate-400 text-xs">
                           <div>{cert.college_name}</div>
@@ -829,7 +849,10 @@ const AdminCertificates = () => {
                           <Button 
                             variant="ghost" 
                             size="icon" 
-                            onClick={() => window.open(`${canonicalDomain}/verify/${cert.certificate_id || cert.id}`, "_blank")}
+                            onClick={() => {
+                              const certTypeParam = cert.certificate_type === "internship" ? "?type=internship" : "?type=workshop";
+                              window.open(`${canonicalDomain}/verify/${encodeURIComponent(cert.certificate_id || cert.id)}${certTypeParam}`, "_blank");
+                            }}
                             className="text-emerald-400 hover:text-emerald-300 hover:bg-emerald-400/10 h-8 w-8"
                             title="Open Public Verification Link"
                           >
