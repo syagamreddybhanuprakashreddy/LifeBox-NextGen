@@ -41,6 +41,7 @@ const App = () => (
             <Route path="/gnan-ai" element={<GnanAI />} />
             <Route path="/admin/certificates" element={<AdminCertificates />} />
             <Route path="/admin/passwords" element={<AdminPasswords />} />
+            <Route path="/verify" element={<VerifyCertificate />} />
             <Route path="/verify/:id" element={<VerifyCertificate />} />
           </Route>
           <Route path="*" element={<NotFound />} />

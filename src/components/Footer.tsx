@@ -65,6 +65,7 @@ const Footer = () => {
               title: "Resources",
               links: [
                 { l: "Documentation", h: "/technology" },
+                { l: "Verify Credentials", h: "/verify" },
                 { l: "API Status", h: "https://status.lifebox.com" },
                 { l: "Case Studies", h: "/case-studies" },
                 { l: "Privacy Policy", h: "/privacy" },
