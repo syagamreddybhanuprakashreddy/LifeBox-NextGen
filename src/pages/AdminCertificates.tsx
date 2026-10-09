@@ -139,24 +139,96 @@ const AdminCertificates = () => {
       
       if (error) throw error;
       return (data || []).map((item: any) => {
-        // Normalize type
-        const isExplicitWs = item.certificate_type === 'workshop' ||
-          item.workshop_name?.toLowerCase().includes('workshop') ||
-          item.certificate_id?.toLowerCase().includes('ws-') ||
-          item.certificate_id?.toLowerCase().startsWith('lbx-ws');
+        // Robust and accurate type normalization
+        const certId = (item.certificate_id || "").toLowerCase();
+        const topic = (item.workshop_name || "").toLowerCase();
+        const storedType = (item.certificate_type || "").toLowerCase().trim();
 
-        const isExplicitInt = item.certificate_type === 'internship' ||
-          item.workshop_name?.toLowerCase().includes('intern') ||
-          item.certificate_id?.toLowerCase().includes('int');
+        const isWsId = certId.startsWith("lbx-ws") || certId.includes("ws-") || certId.includes("-ws") || certId.includes("/ws");
+        const isIntId = certId.startsWith("lbx-int") || certId.includes("int-") || certId.includes("-int") || certId.includes("/int");
 
-        const isIntern = isExplicitInt || !isExplicitWs;
+        let detectedType: "internship" | "workshop";
+        if (isWsId && !isIntId) {
+          detectedType = "workshop";
+        } else if (isIntId && !isWsId) {
+          detectedType = "internship";
+        } else if (topic.includes("workshop") || topic.includes("(workshop)")) {
+          detectedType = "workshop";
+        } else if (topic.includes("internship") || topic.includes("(internship)") || topic.includes("intern")) {
+          detectedType = "internship";
+        } else if (storedType === "workshop") {
+          detectedType = "workshop";
+        } else if (storedType === "internship") {
+          detectedType = "internship";
+        } else {
+          detectedType = "internship";
+        }
+
         return {
           ...item,
-          certificate_type: isIntern ? 'internship' : 'workshop'
+          certificate_type: detectedType
         } as Certificate;
       });
     }
   });
+
+  // Quick switch mutation to divide / move certificates between Internship and Workshop
+  const quickSwitchMutation = useMutation({
+    mutationFn: async ({ id, newType, currentTopic }: { id: string; newType: "internship" | "workshop"; currentTopic: string }) => {
+      const cleanName = currentTopic
+        .replace(/\s*\((?:Internship|Workshop)\)/gi, "")
+        .replace(/\s*(?:Internship|Workshop)\s*$/gi, "")
+        .trim();
+      const newTopicName = `${cleanName} (${newType === "workshop" ? "Workshop" : "Internship"})`;
+
+      // Try updating with certificate_type column
+      let res = await supabase
+        .from('certificates')
+        .update({
+          certificate_type: newType,
+          workshop_name: newTopicName
+        })
+        .eq('id', id)
+        .select()
+        .single();
+
+      // If column doesn't exist, update workshop_name only
+      if (res.error && res.error.message?.includes('certificate_type')) {
+        res = await supabase
+          .from('certificates')
+          .update({ workshop_name: newTopicName })
+          .eq('id', id)
+          .select()
+          .single();
+      }
+
+      if (res.error) throw res.error;
+      return res.data;
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['certificates'] });
+      toast({
+        title: "Certificate Type Updated",
+        description: `Successfully moved credential to ${variables.newType === "workshop" ? "Workshops" : "Internships"} division.`,
+      });
+    },
+    onError: (err: any) => {
+      toast({
+        title: "Update Failed",
+        description: err.message || "Could not change certificate category.",
+        variant: "destructive",
+      });
+    }
+  });
+
+  const handleQuickTypeSwitch = (cert: Certificate) => {
+    const targetType = cert.certificate_type === "internship" ? "workshop" : "internship";
+    quickSwitchMutation.mutate({
+      id: cert.id,
+      newType: targetType,
+      currentTopic: cert.workshop_name
+    });
+  };
 
   // Suggest Next Certificate ID based on type and existing records
   const suggestNextId = (type: "internship" | "workshop") => {
@@ -170,6 +242,12 @@ const AdminCertificates = () => {
   // Create or Update Mutation with graceful backward-compatibility
   const saveMutation = useMutation({
     mutationFn: async (values: z.infer<typeof formSchema>) => {
+      const cleanTopic = values.workshop_name
+        .replace(/\s*\((?:Internship|Workshop)\)/gi, "")
+        .replace(/\s*(?:Internship|Workshop)\s*$/gi, "")
+        .trim();
+      const enrichedTopic = `${cleanTopic} (${values.certificate_type === "workshop" ? "Workshop" : "Internship"})`;
+
       if (editingId) {
         // Try update with certificate_type
         let res = await supabase
@@ -184,9 +262,7 @@ const AdminCertificates = () => {
           const { certificate_type, ...fallbackVals } = values;
           const enrichedVals = {
             ...fallbackVals,
-            workshop_name: values.certificate_type === "internship" && !fallbackVals.workshop_name.toLowerCase().includes("intern")
-              ? `${fallbackVals.workshop_name} (Internship)`
-              : fallbackVals.workshop_name
+            workshop_name: enrichedTopic
           };
           res = await supabase
             .from('certificates')
@@ -211,9 +287,7 @@ const AdminCertificates = () => {
           const { certificate_type, ...fallbackVals } = values;
           const enrichedVals = {
             ...fallbackVals,
-            workshop_name: values.certificate_type === "internship" && !fallbackVals.workshop_name.toLowerCase().includes("intern")
-              ? `${fallbackVals.workshop_name} (Internship)`
-              : fallbackVals.workshop_name
+            workshop_name: enrichedTopic
           };
           res = await supabase
             .from('certificates')
@@ -877,63 +951,128 @@ const AdminCertificates = () => {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
               <h2 className="text-xl font-bold font-['Space_Grotesk'] uppercase tracking-wider text-white">
-                Issued Certificates Registry
+                Issued Credentials Registry
               </h2>
               <p className="text-xs text-slate-400 font-['Inter'] mt-0.5">
-                Total Issued: {certificates?.length || 0} credentials
+                Credentials divided by program type. Click a division card below to filter.
               </p>
             </div>
 
-            {/* Filter Tabs & Refresh */}
-            <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
-              <div className="flex border border-white/10 p-0.5 bg-black">
-                <button
-                  onClick={() => setFilterType("all")}
-                  className={`px-3 py-1.5 text-xs font-['Space_Grotesk'] uppercase transition-colors ${
-                    filterType === "all" ? "bg-cyan-500 text-black font-bold" : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  All ({certificates?.length || 0})
-                </button>
-                <button
-                  onClick={() => setFilterType("internship")}
-                  className={`px-3 py-1.5 text-xs font-['Space_Grotesk'] uppercase transition-colors ${
-                    filterType === "internship" ? "bg-cyan-500 text-black font-bold" : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  Internships ({certificates?.filter(c => c.certificate_type === "internship").length || 0})
-                </button>
-                <button
-                  onClick={() => setFilterType("workshop")}
-                  className={`px-3 py-1.5 text-xs font-['Space_Grotesk'] uppercase transition-colors ${
-                    filterType === "workshop" ? "bg-cyan-500 text-black font-bold" : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  Workshops ({certificates?.filter(c => c.certificate_type === "workshop").length || 0})
-                </button>
-              </div>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => queryClient.invalidateQueries({ queryKey: ['certificates'] })} 
+              className="rounded-none border-white/20 text-white hover:bg-white/10 h-8 self-end md:self-auto"
+            >
+              <RefreshCcw className="w-3.5 h-3.5 mr-1.5" /> Refresh Registry
+            </Button>
+          </div>
 
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => queryClient.invalidateQueries({ queryKey: ['certificates'] })} 
-                className="rounded-none border-white/20 text-white hover:bg-white/10 h-8"
-              >
-                <RefreshCcw className="w-3.5 h-3.5 mr-1.5" /> Refresh
-              </Button>
+          {/* Division Summary Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div 
+              onClick={() => setFilterType("internship")}
+              className={`p-4 cursor-pointer transition-all border ${
+                filterType === "internship" 
+                  ? "bg-cyan-950/40 border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.2)]" 
+                  : "bg-black/60 border-white/10 hover:border-cyan-500/40"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-['Space_Grotesk'] uppercase tracking-wider text-cyan-400 flex items-center gap-2">
+                  <Briefcase className="w-4 h-4" /> Internships Registry
+                </span>
+                <span className="text-2xl font-bold font-mono text-cyan-300">
+                  {certificates?.filter(c => c.certificate_type === "internship").length || 0}
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1 font-['Inter']">
+                Click to view only internship certificates
+              </p>
+            </div>
+
+            <div 
+              onClick={() => setFilterType("workshop")}
+              className={`p-4 cursor-pointer transition-all border ${
+                filterType === "workshop" 
+                  ? "bg-purple-950/40 border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.2)]" 
+                  : "bg-black/60 border-white/10 hover:border-purple-500/40"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-['Space_Grotesk'] uppercase tracking-wider text-purple-400 flex items-center gap-2">
+                  <Award className="w-4 h-4" /> Workshops Registry
+                </span>
+                <span className="text-2xl font-bold font-mono text-purple-300">
+                  {certificates?.filter(c => c.certificate_type === "workshop").length || 0}
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1 font-['Inter']">
+                Click to view only workshop certificates
+              </p>
+            </div>
+
+            <div 
+              onClick={() => setFilterType("all")}
+              className={`p-4 cursor-pointer transition-all border ${
+                filterType === "all" 
+                  ? "bg-slate-900 border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.1)]" 
+                  : "bg-black/60 border-white/10 hover:border-white/30"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-['Space_Grotesk'] uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-cyan-400" /> All Credentials
+                </span>
+                <span className="text-2xl font-bold font-mono text-white">
+                  {certificates?.length || 0}
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1 font-['Inter']">
+                Showing all issued credentials
+              </p>
             </div>
           </div>
 
-          {/* Search Filter Input */}
-          <div className="relative">
-            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <Input
-              type="text"
-              placeholder="Search by candidate name, certificate ID, domain, or college..."
-              value={searchFilter}
-              onChange={(e) => setSearchFilter(e.target.value)}
-              className="bg-black/60 border-white/15 pl-10 rounded-none text-white text-xs h-10 font-['Inter']"
-            />
+          {/* Search Filter and Segmented Tabs */}
+          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+            <div className="relative flex-1">
+              <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <Input
+                type="text"
+                placeholder="Search candidate, certificate ID, domain, or college..."
+                value={searchFilter}
+                onChange={(e) => setSearchFilter(e.target.value)}
+                className="bg-black/60 border-white/15 pl-10 rounded-none text-white text-xs h-10 font-['Inter']"
+              />
+            </div>
+
+            <div className="flex border border-white/10 p-0.5 bg-black shrink-0">
+              <button
+                onClick={() => setFilterType("all")}
+                className={`px-3 py-1.5 text-xs font-['Space_Grotesk'] uppercase transition-colors ${
+                  filterType === "all" ? "bg-white text-black font-bold" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                All ({certificates?.length || 0})
+              </button>
+              <button
+                onClick={() => setFilterType("internship")}
+                className={`px-3 py-1.5 text-xs font-['Space_Grotesk'] uppercase transition-colors ${
+                  filterType === "internship" ? "bg-cyan-500 text-black font-bold" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                Internships ({certificates?.filter(c => c.certificate_type === "internship").length || 0})
+              </button>
+              <button
+                onClick={() => setFilterType("workshop")}
+                className={`px-3 py-1.5 text-xs font-['Space_Grotesk'] uppercase transition-colors ${
+                  filterType === "workshop" ? "bg-purple-500 text-black font-bold" : "text-slate-400 hover:text-white"
+                }`}
+              >
+                Workshops ({certificates?.filter(c => c.certificate_type === "workshop").length || 0})
+              </button>
+            </div>
           </div>
 
           {isFetching ? (
@@ -945,7 +1084,7 @@ const AdminCertificates = () => {
               <table className="w-full text-left font-['Inter'] text-sm">
                 <thead>
                   <tr className="border-b border-white/10 text-slate-400 uppercase tracking-wider font-['Space_Grotesk'] text-xs">
-                    <th className="pb-3 pr-3">Type</th>
+                    <th className="pb-3 pr-3">Division</th>
                     <th className="pb-3 pr-4">Certificate ID</th>
                     <th className="pb-3 pr-4">Candidate</th>
                     <th className="pb-3 pr-4">Domain / Workshop</th>
@@ -960,14 +1099,25 @@ const AdminCertificates = () => {
                     return (
                       <tr key={cert.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
                         <td className="py-4 pr-3">
-                          <span className={`inline-flex items-center gap-1 text-[11px] font-['Space_Grotesk'] uppercase px-2 py-0.5 rounded font-medium ${
-                            isCertInternship 
-                              ? "bg-cyan-500/10 border border-cyan-500/30 text-cyan-300" 
-                              : "bg-purple-500/10 border border-purple-500/30 text-purple-300"
-                          }`}>
-                            {isCertInternship ? <Briefcase className="w-3 h-3" /> : <Award className="w-3 h-3" />}
-                            {isCertInternship ? "Intern" : "Workshop"}
-                          </span>
+                          <div className="flex flex-col gap-1 items-start">
+                            <span className={`inline-flex items-center gap-1 text-[11px] font-['Space_Grotesk'] uppercase px-2 py-0.5 rounded font-semibold ${
+                              isCertInternship 
+                                ? "bg-cyan-500/10 border border-cyan-500/30 text-cyan-300" 
+                                : "bg-purple-500/10 border border-purple-500/30 text-purple-300"
+                            }`}>
+                              {isCertInternship ? <Briefcase className="w-3 h-3 text-cyan-400" /> : <Award className="w-3 h-3 text-purple-400" />}
+                              {isCertInternship ? "Internship" : "Workshop"}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleQuickTypeSwitch(cert)}
+                              disabled={quickSwitchMutation.isPending}
+                              title={`Click to divide/move this credential to ${isCertInternship ? 'Workshops' : 'Internships'}`}
+                              className="text-[10px] font-mono px-1.5 py-0.5 border border-white/10 text-slate-400 hover:text-white hover:border-cyan-400/50 hover:bg-white/5 transition-all whitespace-nowrap"
+                            >
+                              {isCertInternship ? "→ Move to Workshop" : "→ Move to Intern"}
+                            </button>
+                          </div>
                         </td>
                         <td className="py-4 pr-4 font-mono text-cyan-400 text-xs font-semibold">
                           {cert.certificate_id}

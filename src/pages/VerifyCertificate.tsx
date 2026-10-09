@@ -113,26 +113,42 @@ const VerifyCertificate = () => {
     navigate(`/verify/${encodeURIComponent(searchQuery.trim())}`);
   };
 
-  // Check if explicitly workshop:
-  const isExplicitWorkshop = Boolean(
+  const certId = (certificate?.certificate_id || "").toLowerCase();
+  const certTopic = (certificate?.workshop_name || "").toLowerCase();
+  const certTypeStored = (certificate?.certificate_type || "").toLowerCase().trim();
+
+  const isWsExplicit = Boolean(
     urlType === "workshop" ||
-    certificate?.certificate_type === "workshop" ||
-    certificate?.certificate_id?.toLowerCase().includes("ws-") ||
-    certificate?.certificate_id?.toLowerCase().startsWith("lbx-ws") ||
-    certificate?.workshop_name?.toLowerCase().includes("workshop")
+    certId.startsWith("lbx-ws") ||
+    certId.includes("ws-") ||
+    certId.includes("-ws") ||
+    certTopic.includes("workshop") ||
+    certTopic.includes("(workshop)") ||
+    certTypeStored === "workshop"
   );
 
-  // Check if explicitly internship:
-  const isExplicitInternship = Boolean(
-    urlType === "internship" ||
-    certificate?.certificate_type === "internship" ||
-    certificate?.certificate_id?.toLowerCase().includes("int") ||
-    certificate?.certificate_id?.toLowerCase().includes("intern") ||
-    certificate?.workshop_name?.toLowerCase().includes("intern")
-  );
-
-  // Default to internship unless explicitly designated as a workshop
-  const isInternship = certificate ? (isExplicitInternship || !isExplicitWorkshop) : false;
+  let isInternship = false;
+  if (certificate) {
+    if (urlType === "workshop") {
+      isInternship = false;
+    } else if (urlType === "internship") {
+      isInternship = true;
+    } else if (certId.startsWith("lbx-ws") || certId.includes("ws-") || certId.includes("-ws")) {
+      isInternship = false;
+    } else if (certId.startsWith("lbx-int") || certId.includes("int-") || certId.includes("-int")) {
+      isInternship = true;
+    } else if (certTopic.includes("workshop") || certTopic.includes("(workshop)")) {
+      isInternship = false;
+    } else if (certTopic.includes("internship") || certTopic.includes("(internship)") || certTopic.includes("intern")) {
+      isInternship = true;
+    } else if (certTypeStored === "workshop") {
+      isInternship = false;
+    } else if (certTypeStored === "internship") {
+      isInternship = true;
+    } else {
+      isInternship = !isWsExplicit;
+    }
+  }
 
   const rawTopic = certificate?.workshop_name || "";
   // Strip out any trailing "(Internship)", "(Workshop)", or "Internship" from display so domain looks pristine
