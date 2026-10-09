@@ -23,9 +23,18 @@ import {
   Search, 
   Sparkles,
   Download,
-  Code
+  Code,
+  Lock,
+  Eye,
+  EyeOff,
+  AlertCircle,
+  ArrowRight,
+  ShieldCheck
 } from "lucide-react";
 import Seo from "@/components/Seo";
+
+// Set admin passcode from environment or fallback to standard passcode
+const ADMIN_PASSCODE = import.meta.env.VITE_ADMIN_PASSCODE || "ASAG3010";
 
 const POPULAR_DOMAINS = [
   "Full Stack Web Development",
@@ -55,6 +64,15 @@ type Certificate = z.infer<typeof formSchema> & { id: string; created_at: string
 const AdminCertificates = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+
+  // Authentication State
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    return sessionStorage.getItem("admin_cert_authenticated") === "true";
+  });
+  const [passcode, setPasscode] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [authError, setAuthError] = useState("");
+
   const [editingId, setEditingId] = useState<string | null>(null);
   const [activeCert, setActiveCert] = useState<{ id: string; certificate_id: string; type: string } | null>(null);
   const [copied, setCopied] = useState(false);
@@ -78,9 +96,41 @@ const AdminCertificates = () => {
 
   const selectedType = form.watch("certificate_type");
 
-  // Fetch Certificates History
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passcode.trim() === ADMIN_PASSCODE) {
+      setIsAuthenticated(true);
+      sessionStorage.setItem("admin_cert_authenticated", "true");
+      setAuthError("");
+      toast({
+        title: "Access Granted",
+        description: "Welcome to the Certificate Issuance Hub.",
+      });
+    } else {
+      setAuthError("Incorrect admin password. Please try again.");
+      toast({
+        title: "Access Denied",
+        description: "Incorrect admin password.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    sessionStorage.removeItem("admin_cert_authenticated");
+    setPasscode("");
+    setAuthError("");
+    toast({
+      title: "Dashboard Locked",
+      description: "Admin session locked successfully.",
+    });
+  };
+
+  // Fetch Certificates History - only executed when authenticated
   const { data: certificates, isLoading: isFetching } = useQuery({
     queryKey: ['certificates'],
+    enabled: isAuthenticated,
     queryFn: async () => {
       const { data, error } = await supabase
         .from('certificates')
@@ -319,6 +369,100 @@ const AdminCertificates = () => {
     return matchesType && matchesSearch;
   });
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen pt-24 pb-12 flex flex-col items-center justify-center relative overflow-hidden bg-black text-white px-4 sm:px-6">
+        <Seo 
+          title="Admin Access - Certificate Issuance | LifeBox NextGen" 
+          description="Restricted administrative access for LifeBox NextGen Certificate Issuance Hub." 
+        />
+        
+        {/* Cyber Ambient Background Glows */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[350px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[300px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="relative z-10 w-full max-w-md">
+          {/* Cyber Lock Card */}
+          <div className="tech-card tech-border-glow p-8 bg-black/85 backdrop-blur-xl border border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.15)] space-y-6">
+            
+            {/* Header Icon & Title */}
+            <div className="flex flex-col items-center text-center space-y-3">
+              <div className="w-16 h-16 rounded-2xl bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-center shadow-[0_0_25px_rgba(6,182,212,0.3)]">
+                <Lock className="w-8 h-8 text-cyan-400" />
+              </div>
+              <div>
+                <span className="text-[10px] font-mono tracking-[0.25em] text-cyan-400 uppercase bg-cyan-950/60 px-3 py-1 border border-cyan-500/30 rounded-full">
+                  Restricted Admin Portal
+                </span>
+                <h1 className="text-2xl font-bold font-['Space_Grotesk'] uppercase tracking-wider text-white mt-3">
+                  Admin <span className="neon-text-cyan">Verification</span>
+                </h1>
+                <p className="text-slate-400 font-['Inter'] text-xs mt-1.5 leading-relaxed">
+                  Enter your administrator password to unlock the certificate issuance and management dashboard.
+                </p>
+              </div>
+            </div>
+
+            {/* Error Banner */}
+            {authError && (
+              <div className="p-3 bg-red-950/40 border border-red-500/40 text-red-300 text-xs flex items-center gap-2 font-mono">
+                <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                <span>{authError}</span>
+              </div>
+            )}
+
+            {/* Password Form */}
+            <form onSubmit={handleLogin} className="space-y-4">
+              <div className="space-y-1.5 text-left">
+                <label className="text-xs font-mono uppercase tracking-wider text-slate-300">
+                  Admin Password
+                </label>
+                <div className="relative">
+                  <Input 
+                    type={showPassword ? "text" : "password"} 
+                    placeholder="Enter admin password..." 
+                    value={passcode}
+                    onChange={(e) => {
+                      setPasscode(e.target.value);
+                      if (authError) setAuthError("");
+                    }}
+                    className="bg-black/60 border-white/20 text-white placeholder:text-slate-600 focus-visible:ring-cyan-400 focus-visible:border-cyan-400 rounded-none font-mono text-sm pr-10 h-12"
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-cyan-400 transition-colors p-1"
+                    title={showPassword ? "Hide password" : "Show password"}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <Button 
+                type="submit" 
+                className="w-full btn-tech h-12 rounded-none font-['Space_Grotesk'] text-sm tracking-wider uppercase flex items-center justify-center gap-2 group"
+              >
+                <span>Unlock Dashboard</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </form>
+
+            <div className="pt-2 border-t border-white/10 text-center">
+              <p className="text-[11px] text-slate-500 font-mono">
+                Looking to verify a student certificate?{" "}
+                <a href="/verify" className="text-cyan-400 hover:underline">
+                  Public Verification &rarr;
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen pt-24 pb-16 flex flex-col items-center justify-start relative overflow-hidden bg-black text-white px-4 sm:px-6">
       <Seo 
@@ -342,15 +486,27 @@ const AdminCertificates = () => {
               Issue accredited Internship & Workshop certificates with verified QR codes and 1-click LinkedIn credentials.
             </p>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowSqlGuide(!showSqlGuide)}
-            className="rounded-none border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 font-['Space_Grotesk'] text-xs uppercase"
-          >
-            <Code className="w-4 h-4 mr-2" />
-            {showSqlGuide ? "Hide Supabase Info" : "Supabase Schema Note"}
-          </Button>
+          <div className="flex items-center gap-3 flex-wrap">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowSqlGuide(!showSqlGuide)}
+              className="rounded-none border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 font-['Space_Grotesk'] text-xs uppercase"
+            >
+              <Code className="w-4 h-4 mr-2" />
+              {showSqlGuide ? "Hide Supabase Info" : "Supabase Schema Note"}
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleLogout}
+              className="rounded-none border-red-500/30 text-red-400 hover:bg-red-500/10 font-['Space_Grotesk'] text-xs uppercase"
+              title="Lock Admin Dashboard"
+            >
+              <Lock className="w-4 h-4 mr-2" />
+              Lock Dashboard
+            </Button>
+          </div>
         </div>
 
         {/* Supabase Schema Helper Notice (Collapsible) */}
